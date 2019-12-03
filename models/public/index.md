@@ -143,6 +143,18 @@ instances, thus faster than previous, because network runs once.
 |------------------------------ | ----------------------------------------------------------------------------------------- | ----------------------------- | ------ | ------- |
 | human-pose-estimation-3d-0001 | [PyTorch\*](./human-pose-estimation-3d-0001/description/human-pose-estimation-3d-0001.md) | human-pose-estimation-3d-0001 | 18.998 |  5.074  |
 
+## Statistical language modeling
+
+Statistical language modeling has been applied to a wide range of applications
+and domains with great success. To name a few, automatic speech recognition,
+machine translation, spelling correction, touchscreen “soft” keyboards and
+many natural language processing applications depend on the quality of
+language models (LMs)
+
+| Model Name                    | Implementation                                                                            | OMZ Model Name                | GFlops | mParams |
+|------------------------------ | ----------------------------------------------------------------------------------------- | ----------------------------- | ------ | ------- |
+| lm_1b | [Tensorflow\*](./lm_1b/lm_1b.md) | lm_1b |  |  |
+
 ## Legal Information
 
 [*] Other names and brands may be claimed as the property of others.

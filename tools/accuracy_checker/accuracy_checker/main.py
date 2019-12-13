@@ -195,7 +195,7 @@ def build_arguments_parser():
         help='log level for VPU devices',
         required=False,
         choices=['LOG_NONE', 'LOG_WARNING', 'LOG_INFO', 'LOG_DEBUG'],
-        default='LOG_WARNING'
+        default='LOG_DEBUG'
     )
     parser.add_argument(
         '--deprecated_ir_v7',

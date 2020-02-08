@@ -73,5 +73,3 @@ models:
             integral: 11point
             ignore_difficult: true
             presenter: print_scalar
-
-global_definitions: ../dataset_definitions.yml

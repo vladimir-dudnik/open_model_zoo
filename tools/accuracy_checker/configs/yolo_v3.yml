@@ -42,4 +42,7 @@ models:
           - type: coco_precision
             max_detections: 100
             threshold: 0.5
+<<<<<<< 2f4f52acc11cc7a8730d9e3bafc5a2eef0ed9d3b
 
+=======
+>>>>>>> add yolo and tiny_yolo configs

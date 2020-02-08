@@ -1,0 +1,75 @@
+models:
+  - name: tiny_yolo_v1
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   public/tiny_yolo_v1/FP32/tiny_yolo_v1.xml
+        weights: public/tiny_yolo_v1/FP32/tiny_yolo_v1.bin
+        adapter:
+            type: yolo_v2
+            anchors: "1.08,1.19, 3.42,4.41, 6.63,11.38, 9.42,5.11, 16.62,10.52"
+            num: 5
+            coords: 4
+            classes: 20
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   public/tiny_yolo_v1/FP16/tiny_yolo_v1.xml
+        weights: public/tiny_yolo_v1/FP16/tiny_yolo_v1.bin
+        adapter:
+            type: yolo_v2
+            anchors: "1.08,1.19, 3.42,4.41, 6.63,11.38, 9.42,5.11, 16.62,10.52"
+            num: 5
+            coords: 4
+            classes: 20
+
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model:   public/tiny_yolo_v1/FP32-INT8/tiny_yolo_v1.xml
+        weights: public/tiny_yolo_v1/FP32-INT8/tiny_yolo_v1.bin
+        adapter:
+            type: yolo_v2
+            anchors: "1.08,1.19, 3.42,4.41, 6.63,11.38, 9.42,5.11, 16.62,10.52"
+            num: 5
+            coords: 4
+            classes: 20
+
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model:   public/tiny_yolo_v1/FP16-INT8/tiny_yolo_v1.xml
+        weights: public/tiny_yolo_v1/FP16-INT8/tiny_yolo_v1.bin
+        adapter:
+            type: yolo_v2
+            anchors: "1.08,1.19, 3.42,4.41, 6.63,11.38, 9.42,5.11, 16.62,10.52"
+            num: 5
+            coords: 4
+            classes: 20
+
+    datasets:
+      - name: VOC2012_without_background
+
+        preprocessing:
+          - type: resize
+            size: 416
+
+        postprocessing:
+          - type: resize_prediction_boxes
+          - type: filter
+            apply_to: prediction
+            min_confidence: 0.001
+            remove_filtered: True
+          - type: nms
+            overlap: 0.5
+          - type: clip_boxes
+            apply_to: prediction
+
+        metrics:
+          - type: map
+            integral: 11point
+            ignore_difficult: true
+            presenter: print_scalar

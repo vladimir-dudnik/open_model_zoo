@@ -15,7 +15,6 @@ models:
               - conv2d_58/Conv2D/YoloRegion
               - conv2d_66/Conv2D/YoloRegion
               - conv2d_74/Conv2D/YoloRegion
-
     datasets:
       - name: ms_coco_detection_80_class_without_background
 

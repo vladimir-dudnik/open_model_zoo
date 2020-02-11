@@ -17,7 +17,7 @@ models:
               - conv2d_74/Conv2D/YoloRegion
 
     datasets:
-      - name: ms_coco_detection_80_class_without_backgound
+      - name: ms_coco_detection_80_class_without_background
 
         preprocessing:
           - type: resize
@@ -42,7 +42,4 @@ models:
           - type: coco_precision
             max_detections: 100
             threshold: 0.5
-<<<<<<< 2f4f52acc11cc7a8730d9e3bafc5a2eef0ed9d3b
 
-=======
->>>>>>> add yolo and tiny_yolo configs

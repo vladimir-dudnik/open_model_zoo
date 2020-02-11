@@ -78,8 +78,5 @@ models:
           - type: coco_precision
             max_detections: 100
             threshold: 0.5
-<<<<<<< 4b0f9dabcce593afb82171029a4b931c2024da01
 
 global_definitions: ../dataset_definitions.yml
-=======
->>>>>>> add yolo and tiny_yolo configs

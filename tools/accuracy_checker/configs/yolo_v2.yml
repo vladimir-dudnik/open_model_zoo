@@ -40,5 +40,3 @@ models:
             threshold: 0.5
 
 global_definitions: ../dataset_definitions.yml
-=======
->>>>>>> add yolo and tiny_yolo configs

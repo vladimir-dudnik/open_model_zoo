@@ -1,5 +1,5 @@
 models:
-  - name: googlenet-v1-tf
+  - name: googlenet-v1
     launchers:
       - framework: tf
         model: public/googlenet-v1-tf/inception_v1.frozen.pb

@@ -1,0 +1,33 @@
+models:
+  - name: resnet-18
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   public/resnet-18/FP32/resnet-18.xml
+        weights: public/resnet-18/FP32/resnet-18.bin
+        adapter: classification
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   public/resnet-18/FP16/resnet-18.xml
+        weights: public/resnet-18/FP16/resnet-18.bin
+        adapter: classification
+
+    datasets:
+      - name: imagenet_1000_classes
+        reader: pillow_imread
+
+        # Image channels must be swapped, because "pillow_imread" reads in RGB, but converted model expect BGR
+        preprocessing:
+          - type: resize
+            size: 256
+            aspect_ratio_scale: greater
+            use_pillow: True
+            interpolation: BILINEAR
+          - type: crop
+            size: 224
+            use_pillow: True
+          - type: bgr_to_rgb
+global_definitions: ../dataset_definitions.yml

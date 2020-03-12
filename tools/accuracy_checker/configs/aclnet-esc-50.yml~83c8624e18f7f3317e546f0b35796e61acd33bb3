@@ -1,0 +1,29 @@
+# model-zoo-models-private
+models:
+  - name: aclnet-esc-50
+
+    launchers:
+      - framework: dlsdk
+        adapter: classification
+
+    datasets:
+      - name: wav-esc
+
+        preprocessing:
+          - type: resample_audio
+            sample_rate: 16000
+          - type: clip_audio
+            duration: 1
+            max_clips: 5
+          - type: normalization
+            std: 32768
+
+        metrics:
+          - type: accuracy
+            name: top@1
+            top_k: 1
+          - type: accuracy
+            name: top@5
+            top_k: 5
+
+global_definitions: ../dataset_definitions.yml

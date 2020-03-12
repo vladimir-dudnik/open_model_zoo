@@ -9,6 +9,7 @@ models:
             num: 5
             coords: 4
             classes: 80
+            cells: 19
 
     datasets:
       - name: ms_coco_detection_80_class_without_background

@@ -43,3 +43,4 @@ models:
             type: accuracy
             top_k: 5
 
+global_definitions: ../dataset_definitions.yml

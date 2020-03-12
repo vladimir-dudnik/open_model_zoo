@@ -43,9 +43,3 @@ models:
             max_detections: 100
             threshold: 0.5
 
-<<<<<<< b37a57de7d2cec573cc025372377fafaeaf90200
-global_definitions: ../dataset_definitions.yml
-
-=======
-global_definitions: ../datasets_definitions.yml
->>>>>>> update yolo configs

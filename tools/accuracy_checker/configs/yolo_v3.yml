@@ -6,7 +6,6 @@ models:
         adapter:
             type: yolo_v3
             anchors: "10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326"
-            #num: 3
             num: 9
             coords: 4
             classes: 80
@@ -42,4 +41,4 @@ models:
             max_detections: 100
             threshold: 0.5
 
-global_definitions: ../dataset_definitions.yml
+global_definitions: ../datasets_definitions.yml

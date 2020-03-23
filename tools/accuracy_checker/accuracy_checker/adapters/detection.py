@@ -494,7 +494,6 @@ class RFCNCaffe(Adapter):
 
         return pred_boxes
 
-
 class FaceBoxesAdapter(Adapter):
     """
     Class for converting output of FaceBoxes models to DetectionPrediction representation
@@ -864,3 +863,4 @@ class FaceDetectionRefinementAdapter(Adapter):
                 scores=detections['scores']
             )
         ]
+

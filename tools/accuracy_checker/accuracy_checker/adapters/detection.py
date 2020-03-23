@@ -863,3 +863,4 @@ class FaceDetectionRefinementAdapter(Adapter):
                 scores=detections['scores']
             )
         )
+

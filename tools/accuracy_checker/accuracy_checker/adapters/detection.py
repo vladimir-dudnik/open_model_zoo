@@ -881,3 +881,4 @@ class FaceDetectionRefinementAdapter(Adapter):
             )
         ]
 
+

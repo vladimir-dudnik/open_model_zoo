@@ -807,4 +807,3 @@ class RFCNCaffe(Adapter):
         pred_boxes[:, 3::4] = pred_ctr_y + 0.5 * pred_h
 
         return pred_boxes
-

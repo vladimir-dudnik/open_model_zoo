@@ -1,12 +1,12 @@
 # model-zoo-models-private
 models:
-  - name: R-FCN-resnet-50
+  - name: rfcn-resnet50
     launchers:
       - framework: dlsdk
         tags:
           - FP32
-        model: R-FCN-resnet-50/caffe/FP32/R-FCN-resnet-50.xml
-        weights: R-FCN-resnet-50/caffe/FP32/R-FCN-resnet-50.bin
+        model:   rfcn-resnet50/caffe/FP32/rfcn-resnet50.xml
+        weights: rfcn-resnet50/caffe/FP32/rfcn-resnet50.bin
         inputs:
           - name: im_info
             type: CONST_INPUT
@@ -21,8 +21,8 @@ models:
       - framework: dlsdk
         tags:
           - FP16
-        model: R-FCN-resnet-50/caffe/FP16/R-FCN-resnet-50.xml
-        weights: R-FCN-resnet-50/caffe/FP16/R-FCN-resnet-50.bin
+        model:   rfcn-resnet50/caffe/FP16/rfcn-resnet50.xml
+        weights: rfcn-resnet50/caffe/FP16/rfcn-resnet50.bin
         inputs:
           - name: im_info
             type: CONST_INPUT
@@ -37,8 +37,8 @@ models:
       - framework: dlsdk
         tags:
           - FP32-INT8
-        model: R-FCN-resnet-50/caffe/FP32-INT8/R-FCN-resnet-50.xml
-        weights: R-FCN-resnet-50/caffe/FP32-INT8/R-FCN-resnet-50.bin
+        model:   rfcn-resnet50/caffe/FP32-INT8/rfcn-resnet50.xml
+        weights: rfcn-resnet50/caffe/FP32-INT8/rfcn-resnet50.bin
         inputs:
           - name: im_info
             type: CONST_INPUT
@@ -53,8 +53,8 @@ models:
       - framework: dlsdk
         tags:
           - FP16-INT8
-        model: R-FCN-resnet-50/caffe/FP16-INT8/R-FCN-resnet-50.xml
-        weights: R-FCN-resnet-50/caffe/FP16-INT8/R-FCN-resnet-50.bin
+        model:   rfcn-resnet50/caffe/FP16-INT8/rfcn-resnet50.xml
+        weights: rfcn-resnet50/caffe/FP16-INT8/rfcn-resnet50.bin
         inputs:
           - name: im_info
             type: CONST_INPUT

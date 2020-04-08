@@ -6,6 +6,7 @@ models:
         inputs:
           - name: im_info
             type: IMAGE_INFO
+
         outputs:
           - proposal
         adapter:
@@ -13,7 +14,6 @@ models:
           cls_out: cls_prob_reshape
           bbox_out: bbox_pred_reshape
           rois_out: proposal
-
     datasets:
         - name: VOC2012
           preprocessing:
@@ -31,3 +31,4 @@ models:
               apply_to: prediction
 
 global_definitions: ../dataset_definitions.yml
+

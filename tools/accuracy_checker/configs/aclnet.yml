@@ -1,0 +1,61 @@
+# model-zoo-models-private
+models:
+  - name: aclnet
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   ACLnet/caffe2/FP32/ACLnet.xml
+        weights: ACLnet/caffe2/FP32/ACLnet.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   ACLnet/caffe2/FP16/ACLnet.xml
+        weights: ACLnet/caffe2/FP16/ACLnet.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model:   ACLnet/caffe2/FP32-INT8/ACLnet.xml
+        weights: ACLnet/caffe2/FP32-INT8/ACLnet.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model:   ACLnet/caffe2/FP16-INT8/ACLnet.xml
+        weights: ACLnet/caffe2/FP16-INT8/ACLnet.bin
+        adapter: classification
+
+    datasets:
+      - name: wav-esc
+        annotation_conversion:
+          converter: esc
+          annotation_file: esc-50/meta/esc50.csv
+          fold: 4
+          audio_dir: esc-50/audio
+        annotation: wav.pickle
+        data_source: esc-50/audio
+        reader: wav_reader
+
+        preprocessing:
+          - type: resample_audio
+            sample_rate: 16000
+          - type: clip_audio
+            size: 1
+            max_clips: 5
+          - type: normalization
+            std: 32768
+
+        metrics:
+          - type: accuracy
+            name: top@1
+            top_k: 1
+          - type: accuracy
+            name: top@5
+            top_k: 5
+

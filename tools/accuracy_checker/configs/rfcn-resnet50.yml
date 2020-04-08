@@ -1,6 +1,6 @@
 # model-zoo-models-private
 models:
-  - name: R-FCN-resnet-50
+  - name: rfcn-resnet50
     launchers:
       - framework: dlsdk
         tags:

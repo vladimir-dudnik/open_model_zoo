@@ -4,35 +4,18 @@ models:
 
     launchers:
       - framework: dlsdk
-        tags:
-          - FP32
-        model:   public/aclnet/FP32/aclnet.xml
-        weights: public/aclnet/FP32/aclnet.bin
-        adapter: classification
-
-      - framework: dlsdk
-        tags:
-          - FP16
-        model:   public/aclnet/FP16/aclnet.xml
-        weights: public/aclnet/FP16/aclnet.bin
-        adapter: classification
-
-      - framework: dlsdk
-        tags:
-          - FP32-INT8
-        model:   public/aclnet/FP32-INT8/aclnet.xml
-        weights: public/aclnet/FP32-INT8/aclnet.bin
-        adapter: classification
-
-      - framework: dlsdk
-        tags:
-          - FP16-INT8
-        model:   public/aclnet/FP16-INT8/aclnet.xml
-        weights: public/aclnet/FP16-INT8/aclnet.bin
         adapter: classification
 
     datasets:
       - name: wav-esc
+        annotation_conversion:
+          converter: esc
+          annotation_file: esc-50/meta/esc50.csv
+          fold: 4
+          audio_dir: esc-50/audio
+        annotation: wav.pickle
+        data_source: esc-50/audio
+        reader: wav_reader
 
         preprocessing:
           - type: resample_audio
@@ -51,4 +34,3 @@ models:
             name: top@5
             top_k: 5
 
-global_definitions: ../dataset_definitions.yml

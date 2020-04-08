@@ -1,33 +1,33 @@
 models:
-  - name: PeleeNet
+  - name: peleenet
 
     launchers:
       - framework: dlsdk
         tags:
           - FP32
-        model:   PeleeNet/caffe/FP32/PeleeNet.xml
-        weights: PeleeNet/caffe/FP32/PeleeNet.bin
+        model:   peleenet/caffe/FP32/peleenet.xml
+        weights: peleenet/caffe/FP32/peleenet.bin
         adapter: ssd
 
       - framework: dlsdk
         tags:
           - FP16
-        model:   PeleeNet/caffe/FP16/PeleeNet.xml
-        weights: PeleeNet/caffe/FP16/PeleeNet.bin
+        model:   peleenet/caffe/FP16/peleenet.xml
+        weights: peleenet/caffe/FP16/peleenet.bin
         adapter: ssd
 
       - framework: dlsdk
         tags:
           - FP32-INT8
-        model:   PeleeNet/caffe/FP32-INT8/PeleeNet.xml
-        weights: PeleeNet/caffe/FP32-INT8/PeleeNet.bin
+        model:   peleenet/caffe/FP32-INT8/peleenet.xml
+        weights: peleenet/caffe/FP32-INT8/peleenet.bin
         adapter: ssd
 
       - framework: dlsdk
         tags:
           - FP16-INT8
-        model:   PeleeNet/caffe/FP16-INT8/PeleeNet.xml
-        weights: PeleeNet/caffe/FP16-INT8/PeleeNet.bin
+        model:   peleenet/caffe/FP16-INT8/peleenet.xml
+        weights: peleenet/caffe/FP16-INT8/peleenet.bin
         adapter: ssd
 
     datasets:

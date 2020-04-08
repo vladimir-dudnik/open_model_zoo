@@ -6,7 +6,6 @@ models:
         inputs:
           - name: im_info
             type: IMAGE_INFO
-
         outputs:
           - proposal
         adapter:

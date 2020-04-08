@@ -6,29 +6,29 @@ models:
       - framework: dlsdk
         tags:
           - FP32
-        model:   ACLnet/caffe2/FP32/ACLnet.xml
-        weights: ACLnet/caffe2/FP32/ACLnet.bin
+        model:   public/aclnet/FP32/aclnet.xml
+        weights: public/aclnet/FP32/aclnet.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP16
-        model:   ACLnet/caffe2/FP16/ACLnet.xml
-        weights: ACLnet/caffe2/FP16/ACLnet.bin
+        model:   public/aclnet/FP16/aclnet.xml
+        weights: public/aclnet/FP16/aclnet.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP32-INT8
-        model:   ACLnet/caffe2/FP32-INT8/ACLnet.xml
-        weights: ACLnet/caffe2/FP32-INT8/ACLnet.bin
+        model:   public/aclnet/FP32-INT8/aclnet.xml
+        weights: public/aclnet/FP32-INT8/aclnet.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP16-INT8
-        model:   ACLnet/caffe2/FP16-INT8/ACLnet.xml
-        weights: ACLnet/caffe2/FP16-INT8/ACLnet.bin
+        model:   public/aclnet/FP16-INT8/aclnet.xml
+        weights: public/aclnet/FP16-INT8/aclnet.bin
         adapter: classification
 
     datasets:

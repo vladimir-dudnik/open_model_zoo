@@ -1,0 +1,50 @@
+models:
+  - name: PeleeNet
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   PeleeNet/caffe/FP32/PeleeNet.xml
+        weights: PeleeNet/caffe/FP32/PeleeNet.bin
+        adapter: ssd
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   PeleeNet/caffe/FP16/PeleeNet.xml
+        weights: PeleeNet/caffe/FP16/PeleeNet.bin
+        adapter: ssd
+
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model:   PeleeNet/caffe/FP32-INT8/PeleeNet.xml
+        weights: PeleeNet/caffe/FP32-INT8/PeleeNet.bin
+        adapter: ssd
+
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model:   PeleeNet/caffe/FP16-INT8/PeleeNet.xml
+        weights: PeleeNet/caffe/FP16-INT8/PeleeNet.bin
+        adapter: ssd
+
+    datasets:
+      - name: VOC2007
+
+        preprocessing:
+          - type: resize
+            dst_width: 304
+            dst_height: 304
+
+        postprocessing:
+          - type: resize_prediction_boxes
+
+        metrics:
+          - type: map
+            integral: 11point
+            overlap_threshold: 0.5
+            ignore_difficult: True
+
+global_definitions: ../dataset_definitions.yml

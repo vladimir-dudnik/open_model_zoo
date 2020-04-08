@@ -1,0 +1,82 @@
+# model-zoo-models-private
+models:
+  - name: R-FCN-resnet-50
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model: R-FCN-resnet-50/caffe/FP32/R-FCN-resnet-50.xml
+        weights: R-FCN-resnet-50/caffe/FP32/R-FCN-resnet-50.bin
+        inputs:
+          - name: im_info
+            type: CONST_INPUT
+            value: [224, 224, 1]
+        outputs:
+          - proposal
+        adapter:
+          type: rfcn_class_agnostic
+          cls_out: cls_prob_reshape
+          bbox_out: bbox_pred_reshape
+          rois_out: proposal
+      - framework: dlsdk
+        tags:
+          - FP16
+        model: R-FCN-resnet-50/caffe/FP16/R-FCN-resnet-50.xml
+        weights: R-FCN-resnet-50/caffe/FP16/R-FCN-resnet-50.bin
+        inputs:
+          - name: im_info
+            type: CONST_INPUT
+            value: [224, 224, 1]
+        outputs:
+          - proposal
+        adapter:
+          type: rfcn_class_agnostic
+          cls_out: cls_prob_reshape
+          bbox_out: bbox_pred_reshape
+          rois_out: proposal
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model: R-FCN-resnet-50/caffe/FP32-INT8/R-FCN-resnet-50.xml
+        weights: R-FCN-resnet-50/caffe/FP32-INT8/R-FCN-resnet-50.bin
+        inputs:
+          - name: im_info
+            type: CONST_INPUT
+            value: [224, 224, 1]
+        outputs:
+          - proposal
+        adapter:
+          type: rfcn_class_agnostic
+          cls_out: cls_prob_reshape
+          bbox_out: bbox_pred_reshape
+          rois_out: proposal
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model: R-FCN-resnet-50/caffe/FP16-INT8/R-FCN-resnet-50.xml
+        weights: R-FCN-resnet-50/caffe/FP16-INT8/R-FCN-resnet-50.bin
+        inputs:
+          - name: im_info
+            type: CONST_INPUT
+            value: [224, 224, 1]
+        outputs:
+          - proposal
+        adapter:
+          type: rfcn_class_agnostic
+          cls_out: cls_prob_reshape
+          bbox_out: bbox_pred_reshape
+          rois_out: proposal
+    datasets:
+        - name: VOC2012
+          preprocessing:
+            - type: resize
+              size: 224
+          postprocessing:
+            - type: clip_boxes
+              apply_to: prediction
+            - type: filter
+              height_range: 2
+              width_range: 2
+              apply_to: prediction
+
+global_definitions: ../dataset_definitions.yml

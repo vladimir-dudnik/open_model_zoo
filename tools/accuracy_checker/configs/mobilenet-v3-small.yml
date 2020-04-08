@@ -1,5 +1,5 @@
 models:
-  - name: MobileNet-v3-small-pytorch
+  - name: mobilenet-v3-small-pytorch
     launchers:
       - framework: dlsdk
         tags:

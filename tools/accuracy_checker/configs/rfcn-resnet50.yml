@@ -30,4 +30,3 @@ models:
               apply_to: prediction
 
 global_definitions: ../dataset_definitions.yml
-

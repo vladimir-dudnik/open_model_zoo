@@ -1,6 +1,5 @@
 models:
   - name: peleenet
-
     launchers:
       - framework: dlsdk
         adapter: ssd

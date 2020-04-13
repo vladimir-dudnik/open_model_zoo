@@ -38,6 +38,11 @@ try:
 except ImportError:
     nib = None
 
+try:
+    from scipy.io import wavfile
+except ImportError:
+    wavfile = None
+
 from ..utils import get_path, read_json, zipped_transform, set_image_metadata, contains_all
 from ..dependency import ClassProvider
 from ..config import BaseField, StringField, ConfigValidator, ConfigError, DictField, ListField, BoolField

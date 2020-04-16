@@ -13,6 +13,7 @@ models:
           cls_out: cls_prob_reshape
           bbox_out: bbox_pred_reshape
           rois_out: proposal
+
     datasets:
         - name: VOC2012
           preprocessing:

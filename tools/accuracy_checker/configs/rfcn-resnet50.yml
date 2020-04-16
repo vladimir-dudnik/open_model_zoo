@@ -9,8 +9,7 @@ models:
         weights: rfcn-resnet50/caffe/FP32/rfcn-resnet50.bin
         inputs:
           - name: im_info
-            type: CONST_INPUT
-            value: [224, 224, 1]
+            type: IMAGE_INFO
         outputs:
           - proposal
         adapter:
@@ -25,8 +24,7 @@ models:
         weights: rfcn-resnet50/caffe/FP16/rfcn-resnet50.bin
         inputs:
           - name: im_info
-            type: CONST_INPUT
-            value: [224, 224, 1]
+            type: IMAGE_INFO
         outputs:
           - proposal
         adapter:
@@ -41,8 +39,7 @@ models:
         weights: rfcn-resnet50/caffe/FP32-INT8/rfcn-resnet50.bin
         inputs:
           - name: im_info
-            type: CONST_INPUT
-            value: [224, 224, 1]
+            type: IMAGE_INFO
         outputs:
           - proposal
         adapter:
@@ -57,8 +54,7 @@ models:
         weights: rfcn-resnet50/caffe/FP16-INT8/rfcn-resnet50.bin
         inputs:
           - name: im_info
-            type: CONST_INPUT
-            value: [224, 224, 1]
+            type: IMAGE_INFO
         outputs:
           - proposal
         adapter:
@@ -70,13 +66,16 @@ models:
         - name: VOC2012
           preprocessing:
             - type: resize
-              size: 224
+              aspect_ratio_scale: fit_to_window
+              dst_height: 600
+              dst_width: 1024
+            - type: padding
+              dst_height: 600
+              dst_width: 1024
+              pad_type: right_bottom
+
           postprocessing:
             - type: clip_boxes
-              apply_to: prediction
-            - type: filter
-              height_range: 2
-              width_range: 2
               apply_to: prediction
 
 global_definitions: ../dataset_definitions.yml

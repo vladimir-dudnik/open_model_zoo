@@ -1,0 +1,61 @@
+models:
+  - name: openpose-pose-coco18
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   openpose-pose/caffe/FP32/openpose-pose.xml
+        weights: openpose-pose/caffe/FP32/openpose-pose.bin
+        allow_reshape_input: True
+        adapter: human_pose_estimation
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   openpose-pose/caffe/FP16/openpose-pose.xml
+        weights: openpose-pose/caffe/FP16/openpose-pose.bin
+        allow_reshape_input: True
+        adapter: human_pose_estimation
+
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model:   openpose-pose/caffe/FP32-INT8/openpose-pose.xml
+        weights: openpose-pose/caffe/FP32-INT8/openpose-pose.bin
+        allow_reshape_input: True
+        adapter: human_pose_estimation
+
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model:   openpose-pose/caffe/FP16-INT8/openpose-pose.xml
+        weights: openpose-pose/caffe/FP16-INT8/openpose-pose.bin
+        allow_reshape_input: True
+        adapter: human_pose_estimation
+
+    datasets:
+      - name: ms_coco_keypoints
+
+        preprocessing:
+          - type: resize
+            size: 368
+            interpolation: CUBIC
+            aspect_ratio_scale: width
+          - type: padding
+            stride: 8
+
+        postprocessing:
+          - type: filter
+            apply_to: annotation
+            area_range: 1, 10000000000
+          - type: filter
+            apply_to: prediction
+            area_range: 1, 10000000000
+
+        metrics:
+          - name: AP
+            type: coco_precision
+            max_detections: 20
+
+global_definitions: ../dataset_definitions.yml

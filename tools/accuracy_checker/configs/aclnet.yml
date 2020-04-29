@@ -33,14 +33,6 @@ models:
 
     datasets:
       - name: wav-esc
-        annotation_conversion:
-          converter: esc
-          annotation_file: esc-50/meta/esc50.csv
-          fold: 4
-          audio_dir: esc-50/audio
-        annotation: wav.pickle
-        data_source: esc-50/audio
-        reader: wav_reader
 
         preprocessing:
           - type: resample_audio

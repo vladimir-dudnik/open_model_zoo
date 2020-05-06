@@ -1,0 +1,77 @@
+models:
+  - name: yolo_v3
+
+    launchers:
+      - framework: dlsdk
+        tags:
+            - FP32
+        model:   yolo_v3/caffe/FP32/yolo_v3.xml
+        weights: yolo_v3/caffe/FP32/yolo_v3.bin
+        adapter:
+          type: yolo_v3
+          anchors: yolo_v3
+          num: 3
+          coords: 4
+          classes: 80
+          threshold: 0.001
+
+      - framework: dlsdk
+        tags:
+            - FP16
+        model:   yolo_v3/caffe/FP16/yolo_v3.xml
+        weights: yolo_v3/caffe/FP16/yolo_v3.bin
+        adapter:
+          type: yolo_v3
+          anchors: yolo_v3
+          num: 3
+          coords: 4
+          classes: 80
+          threshold: 0.001
+
+      - framework: dlsdk
+        tags:
+            - FP32-INT8
+        model:   yolo_v3/caffe/FP32-INT8/yolo_v3.xml
+        weights: yolo_v3/caffe/FP32-INT8/yolo_v3.bin
+        adapter:
+          type: yolo_v3
+          anchors: yolo_v3
+          num: 3
+          coords: 4
+          classes: 80
+          threshold: 0.001
+
+      - framework: dlsdk
+        tags:
+            - FP16-INT8
+        model:   yolo_v3/caffe/FP16-INT8/yolo_v3.xml
+        weights: yolo_v3/caffe/FP16-INT8/yolo_v3.bin
+        adapter:
+          type: yolo_v3
+          anchors: yolo_v3
+          num: 3
+          coords: 4
+          classes: 80
+          threshold: 0.001
+
+    datasets:
+      - name: ms_coco_detection_80_class_without_backgound
+        preprocessing:
+          - type: resize
+            size: 416
+        postprocessing:
+          - type: resize_prediction_boxes
+          - type: filter
+            apply_to: prediction
+            min_confidence: 0.001
+            remove_filtered: True
+          - type: nms
+            overlap: 0.5
+          - type: clip_boxes
+            apply_to: prediction
+        metrics:
+          - type: coco_precision
+            max_detections: 100
+            threshold: .5
+
+global_definitions: ../dataset_definitions.yml

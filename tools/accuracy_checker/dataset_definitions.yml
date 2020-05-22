@@ -810,3 +810,9 @@ datasets:
       doc_stride: 128
       lower_case: true
       vocab_file: vocab.txt
+
+  - name: xnli1.0
+    annotation: XNLI/bert_xnli_tf_record.pickle
+    annotation_conversion:
+      converter: bert_xnli_tf_record
+      annotation_file: XNLI/eval.tf_record

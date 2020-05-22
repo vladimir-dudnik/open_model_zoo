@@ -1246,3 +1246,9 @@ datasets:
       index_of_class: 2
     annotation: barrier_bitvehicle_index_of_class_2.pickle
     dataset_meta: barrier_bitvehicle_index_of_class_2.json
+
+  - name: xnli1.0
+    annotation: XNLI/bert_xnli_tf_record.pickle
+    annotation_conversion:
+      converter: bert_xnli_tf_record
+      annotation_file: XNLI/eval.tf_record

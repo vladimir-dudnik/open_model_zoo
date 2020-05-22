@@ -23,6 +23,7 @@ pydicom
 # nlp, tokenization
 sentencepiece
 tokenizers
+tensorflow<2.0
 
 # editdistance calculation
 editdistance

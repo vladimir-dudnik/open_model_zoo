@@ -738,3 +738,9 @@ datasets:
       images_dir: VOCdevkit/VOC2012/JPEGImages/
       masks_dir: free_form_masks/masks_2k
     annotation: inpainting_voc12_masks2k.pickle
+
+  - name: xnli1.0
+    annotation: XNLI/bert_xnli_tf_record.pickle
+    annotation_conversion:
+      converter: bert_xnli_tf_record
+      annotation_file: XNLI/eval.tf_record

@@ -406,33 +406,6 @@ datasets:
 
   - name: ms_coco_detection_80_class_without_background
     annotation_conversion:
-<<<<<<< 5e73b9aee4f8aa831775f331541e209baac6bc17
-        converter: mscoco_detection
-        annotation_file: instances_val2017.json
-        has_background: True
-        use_full_label_map: False
-    annotation: mscoco_detection_80cl_bkgr.pickle
-    dataset_meta: mscoco_detection_80cl_bkgr.json
-    data_source: val2017
-
-  - name: COCO2017_80cl_bkgr
-    annotation_conversion:
-        converter: mscoco_detection
-        annotation_file: instances_val2017.json
-        has_background: True
-        use_full_label_map: False
-    annotation: mscoco_detection_80cl_bkgr.pickle
-    dataset_meta: mscoco_detection_80cl_bkgr.json
-    data_source: val2017
-
-    postprocessing:
-      - type: resize_prediction_boxes
-    metrics:
-      - type: map
-        integral: 11point
-        ignore_difficult: True
-        presenter: print_scalar
-=======
       converter: mscoco_detection
       annotation_file: instances_val2017.json
       has_background: False
@@ -440,7 +413,6 @@ datasets:
       use_full_label_map: False
     annotation:  mscoco_det_80.pickle
     dataset_meta:  mscoco_det_80.json
->>>>>>> remove duplicate
 
   - name: ms_coco_keypoints
     data_source: human-pose-estimation-0001/images
@@ -596,7 +568,6 @@ datasets:
     annotation: wider_0.pickle
     dataset_meta: wider_0.json
 
-<<<<<<< a0b24e1554990840e3f71409fe0e3892f13ea527
   - name: facial_landmarks_35
     data_source: VOCdevkit/VOC2012/JPEGImages
     annotation_conversion:

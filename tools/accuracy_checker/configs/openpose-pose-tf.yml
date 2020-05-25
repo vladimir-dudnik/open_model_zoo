@@ -1,0 +1,24 @@
+models:
+- name: openpose-pose
+  launchers:
+  - framework: dlsdk
+    allow_reshape_input: True
+    adapter:
+      type: human_pose_estimation
+      part_affinity_fields_out: Mconv7_stage6_L1/Conv2D
+      keypoints_heatmap_out: Mconv7_stage6_L2/Conv2D
+
+  datasets:
+      - name: ms_coco_keypoints
+        preprocessing:
+          - type: resize
+            size: 368
+            interpolation: CUBIC
+            aspect_ratio_scale: width
+          - type: padding
+            stride: 8
+        metrics:
+          - type: coco_precision
+            max_detections: 20
+
+global_definitions: ../dataset_definitions.yml

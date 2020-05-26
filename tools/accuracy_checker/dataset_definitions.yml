@@ -1,4 +1,339 @@
+launchers:
+  - framework: dlsdk
+
 datasets:
+  - name: age_gender
+    annotation_conversion:
+      converter: age_gender
+      data_dir: Age_Gender_Recognition
+    annotation: age_gender.pickle
+    dataset_meta: age_gender.json
+
+  - name: affectnet
+    annotation_conversion:
+      converter: emotion_recognition
+      annotation_file: AffectNet/image_list_5emo.txt
+    annotation: affectnet.pickle
+    dataset_meta: affectnet.json
+
+  - name: wider_label_start_1
+    annotation_conversion:
+      converter: wider
+      annotation_file: WiderFace/wider_face_split/wider_face_val_bbx_gt.txt
+      label_start: 1
+    annotation: widerface_label_start_1.pickle
+    dataset_meta: widerface_label_start_1.json
+
+  - name: wider_label_start_2
+    annotation_conversion:
+      converter: wider
+      annotation_file: WiderFace/wider_face_split/wider_face_val_bbx_gt.txt
+      label_start: 2
+    annotation: widerface_label_start_2.pickle
+    dataset_meta: widerface_label_start_2.json
+
+  - name: datatang_street_subway
+    annotation_conversion:
+      converter: datatang_street_subway
+      annotation_file: Datatang_street_subway/annotation_trainval.xml
+    annotation: datatang_street_subway.pickle
+    dataset_meta: datatang_street_subway.json
+
+  - name: facial_landmarks_35
+    annotation_conversion:
+      converter: facial_landmarks_35
+      data_dir: facial-landmarks-35-adas-0001
+    annotation: facial_landmarks_35.pickle
+
+  - name: gaze_estimation_dataset
+    annotation_conversion:
+      converter: gaze_estimation
+      data_dir: gaze-estimation-adas-0002
+    annotation: gaze_estimation.pickle
+
+  - name: mnist_like
+    annotation_conversion:
+      converter: handwritten_score_recognition
+      annotation_file: mnist_like/test/list.txt
+    annotation: handwritten_score_recognition.pickle
+    dataset_meta: handwritten_score_recognition.json
+
+  - name: BKHD
+    annotation_conversion:
+      converter: head_pose
+      annotation_file: BKHD/angles.xml
+    annotation: bkhd.pickle
+
+  - name: ms_coco_detection_80_class_with_backgound
+    data_source: MSCOCO/val2017
+    annotation_conversion:
+      converter: mscoco_detection
+      annotation_file: MSCOCO/annotations/instances_val2017.json
+      has_background: True
+      sort_annotations: True
+      use_full_label_map: False
+    annotation: mscoco_det_80_bkgr.pickle
+    dataset_meta:  mscoco_det_80_bkgr.json
+
+  - name: ms_coco_detection_80_class_without_backgound
+    data_source: MSCOCO/val2017
+    annotation_conversion:
+      converter: mscoco_detection
+      annotation_file: MSCOCO/annotations/instances_val2017.json
+      has_background: False
+      sort_annotations: True
+      use_full_label_map: False
+    annotation:  mscoco_det_80.pickle
+    dataset_meta:  mscoco_det_80.json
+
+  - name: vgg2face
+    annotation_conversion:
+      converter: vgg_face
+      landmarks_csv_file: VGGFaces2/bb_landmark/loose_landmark_test.csv
+      bbox_csv_file: VGGFaces2/bb_landmark/loose_bb_test.csv
+    annotation: vggfaces2.pickle
+    dataset_meta: vgfces2.json
+
+  - name: lpr
+    annotation_conversion:
+      converter: lpr_json
+      annotation_file: LPR/annotation_test/annotation.json
+      decoding_dictionary_file: LPR/annotation_test/dict
+    annotation: lpr.pickle
+    dataset_meta: lpr.json
+
+  - name: pedestrian_detection_dataset_label_start_1
+    annotation_conversion:
+      converter: detection_opencv_storage
+      annotation_file: adas20/pd/annotations/labels.xml
+      image_names_file: adas20/pd/images/imgs.txt
+      label_start: 1
+      background_label: 0
+    annotation: pd_label_start_1.pickle
+    dataset_meta: pd_label_start_1.json
+
+  - name: pedestrian_detection_dataset_label_start_2
+    annotation_conversion:
+      converter: detection_opencv_storage
+      annotation_file: adas20/pd/annotations/labels.xml
+      image_names_file: adas20/pd/images/imgs.txt
+      label_start: 2
+      background_label: 0
+    annotation: pd_label_start_2.pickle
+    dataset_meta: pd_label_start_2.json
+
+  - name: vehicle_detection_dataset
+    annotation_conversion:
+      converter: detection_opencv_storage
+      annotation_file: adas20/vd/anyangle_vehicle_test_set/annotations/labels.xml
+      background_label: 0
+    annotation: vd.pickle
+    dataset_meta: vd.json
+
+  - name: market_person_6_attributes
+    annotation_conversion:
+      converter: market15_person_attributes
+      annotation_file: Market1501-person-attributes-extra/annotation_test/annotation.json
+      num_attributes: 6
+    annotation: market1501_6_person_attributes.pickle
+    dataset_meta: market1501_6_person_attributes.json
+
+  - name: market_person_8_attributes
+    annotation_conversion:
+      converter: market15_person_attributes
+      annotation_file: person_attributes_test_dataset/test-annotation.json
+    annotation: market1501_8_person_attributes.pickle
+    dataset_meta: market1501_8_person_attributes.json
+
+  - name: action_detection_dataset_3_classes
+    annotation_conversion:
+      converter: action_recognition
+      annotation_file: person-detection-action-recognition/GM_D1_L6_FC_I_S1.mp4.xml
+      use_images: True
+    annotation: action_recognition.pickle
+    dataset_meta: action_recognition.json
+
+  - name: action_detection_dataset_6_classes
+    annotation_conversion:
+       converter: action_recognition
+       annotation_file: person-detection-action-recognition/GM_D1_L6_FC_I_S1.mp4_v2.xml
+       use_case: common_6_actions
+
+  - name: action_detection_dataset_raising_hand
+    annotation_conversion:
+      converter: action_recognition
+      annotation_file: person-detection-action-recognition/GM_D1_L6_FC_I_S1.mp4.xml
+      use_images: True
+      use_case: raising_hand
+    annotation: raising_hand_recognition.pickle
+    dataset_meta: raising_hand_recognition.json
+
+  - name: action_detection_dataset_teacher
+    annotation_conversion:
+      converter: action_recognition
+      annotation_file: person-detection-action-recognition/Kelly_Classroom#5-2.mp4.xml
+      use_case: teacher
+    annotation: action_recognition_teacher.pickle
+    dataset_meta: action_recognition_teacher.json
+
+  - name: market1501
+    data_source: Market1501-person-reidentification/Market-1501-v15.09.15
+    annotation_conversion:
+      converter: market1501_reid
+      data_dir: Market1501-person-reidentification/Market-1501-v15.09.15
+    annotation: market1501_reid.pickle
+
+  - name: globalme-reid
+    data_source: globalme-reid/GlobalMe-reID
+    annotation_conversion:
+      converter: market1501_reid
+      data_dir: globalme-reid/GlobalMe-reID
+    annotation: globalme-reid.pickle
+
+  - name: crossroad_dataset
+    annotation_conversion:
+      converter: crossroad
+      annotation_file: crossroad_extra/annotation_val/annotation.json
+    annotation: crossorad.pickle
+    dataset_meta: crossroad.json
+
+  - name: crossroad_dataset_new
+    annotation_conversion:
+      converter: crossroad
+      annotation_file: crossroad_extra/annotation_val/annotation.json
+      labels: background,vehicle,person,non-vehicle
+    annotation: crossorad.pickle
+    dataset_meta: crossroad.json
+
+  - name: mighty
+    annotation_conversion:
+      converter: mighty
+      annotation_file: mighty/val.txt
+    annotation: mighty.pickle
+    dataset_meta: mighty.json
+
+  - name: mapillary_20
+    annotation_conversion:
+      converter: mapillary_20
+      data_dir: Mapillary_20
+    annotation: mapillary_20.pickle
+    dataset_meta: mapillary_20.json
+
+  - name: DIV2K_valid_HR_cropped_800x800
+    annotation_conversion:
+      converter: super_resolution
+      data_dir: DIV2K_valid_HR_cropped_800x800
+      lr_suffix: lr
+    annotation: super_resolution.pickle
+
+  - name: DIV2K_valid_HR_cropped_1920x1080_upsample_x3
+    annotation_conversion:
+      converter: super_resolution
+      data_dir: DIV2K_valid_HR_cropped_1920x1080
+      lr_suffix: lr_x3
+      upsample_suffix: upsample_x3
+      two_streams: True
+    annotation: super_resolution_x3.pickle
+
+  - name: DIV2K_valid_HR_cropped_1920x1080_upsample_x4
+    annotation_conversion:
+      converter: super_resolution
+      data_dir: DIV2K_valid_HR_cropped_1920x1080
+      lr_suffix: lr_x4
+      upsample_suffix: upsample_x4
+      two_streams: True
+    annotation: super_resolution_x4.pickle
+
+  - name: ICDAR_SR
+    annotation_conversion:
+      converter: super_resolution
+      data_dir: ICDAR_SR/test_crops
+      lr_suffix: lr_
+      hr_suffix: hr_
+    annotation: icdar_sr.pickle
+
+  - name: vehicle_attributes
+    annotation_conversion:
+      converter: vehicle_attributes_json
+      annotation_file: VehicleColor/annotation_val/annotation.json
+    annotation: vehicle_color.pickle
+    dataset_meta: vehicle_color.json
+
+  - name: vehicle_attributes_0042
+    annotation_conversion:
+      converter: vehicle_attributes_json
+      annotation_file: VehicleColor/annotation_val/annotation.json
+      type_labels: "car,van,truck,bus"
+    annotation: vehicle_color_0042.pickle
+    dataset_meta: vehicle_color_0042.json
+
+  - name: bitvehicle_dataset
+    annotation_conversion:
+      converter: bitvehicle_json
+      annotation_file: BITVehicle/annotation_val/annotation.json
+    annotation: bitvehicle.pickle
+    dataset_meta: bitvehicle.json
+
+  - name: vehicle_license_plate_detection
+    data_source: BITVehicle/annotation_val/data
+    annotation_conversion:
+      converter: bitvehicle_json
+      annotation_file: BITVehicle/annotation_val/annotation.json
+    annotation: bitvehicle.pickle
+    dataset_meta: bitvehicle.json
+
+  - name: kelly_driver_recognition_dataset
+    annotation_conversion:
+      converter: clip_action_recognition
+      annotation_file: icv_ar_val_kelly/kelly_driver_actions9_4.json
+      data_dir: icv_ar_val_kelly
+    annotation: driver_action_recognition.pickle
+    dataset_meta: driver_action_recognition.json
+
+  - name: kinetics-400
+    annotation_conversion:
+      converter: clip_action_recognition
+      annotation_file: kinetics/kinetics_400.json
+      data_dir: kinetics/frames_val
+    annotation: kinetics_action_recognition.pickle
+    dataset_meta: kinetics_action_recognition.json
+
+  - name: kinetics-400-frames-79
+    annotation_conversion:
+      converter: clip_action_recognition
+      annotation_file: kinetics/kinetics_400.json
+      data_dir: kinetics/frames_val
+      clip_duration: 79
+      temporal_stride: 1
+    annotation: kinetics_action_recognition_79.pickle
+    dataset_meta: kinetics_action_recognition_79.json
+
+  - name: kinetics-400-frames-79-400
+    annotation_conversion:
+      converter: clip_action_recognition
+      annotation_file: kinetics/kinetics_400.json
+      data_dir: kinetics/frames_val
+      clip_duration: 79
+      temporal_stride: 1
+      num_samples: 400
+    annotation: kinetics_action_recognition_79_400.pickle
+    dataset_meta: kinetics_action_recognition_79_400.json
+
+  - name: TextileCrops
+    annotation_conversion:
+      converter: textile_recognition
+      data_dir: textile/cropped_and_resized
+    annotation: textle.pickle
+    dataset_meta: textile.json
+
+  - name: CamVid
+    data_source: CamVid
+    annotation_conversion:
+      converter: camvid
+      annotation_file: CamVid/val.txt
+    annotation: camvid.pickle
+    dataset_meta: camvid.json
+
   - name: ms_coco_mask_rcnn
     annotation_conversion:
       converter: mscoco_mask_rcnn
@@ -44,7 +379,6 @@ datasets:
         dst_height: 800
         dst_width: 1365
 
-
   - name: ms_coco_detection_91_classes
     annotation_conversion:
       converter: mscoco_detection
@@ -71,27 +405,55 @@ datasets:
         dst_width: 1024
 
   - name: ms_coco_detection_80_class_without_background
-    data_source: val2017
     annotation_conversion:
-      converter: mscoco_detection
-      annotation_file: instances_val2017.json
-      has_background: False
-      sort_annotations: True
-      use_full_label_map: False
-    annotation:  mscoco_det_80.pickle
-    dataset_meta:  mscoco_det_80.json
+        converter: mscoco_detection
+        annotation_file: instances_val2017.json
+        has_background: False
+        use_full_label_map: False
+    annotation: mscoco_detection_80cl_without_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_without_bkgr.json
+    data_source: val2017
+
+  - name: COCO2017_80cl_bkgr
+    annotation_conversion:
+        converter: mscoco_detection
+        annotation_file: instances_val2017.json
+        has_background: True
+        use_full_label_map: False
+    annotation: mscoco_detection_80cl_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_bkgr.json
+    data_source: val2017
+
+    postprocessing:
+      - type: resize_prediction_boxes
+    metrics:
+      - type: map
+        integral: 11point
+        ignore_difficult: True
+        presenter: print_scalar
 
   - name: ms_coco_keypoints
-    data_source: val2017
+    data_source: human-pose-estimation-0001/images
     annotation_conversion:
       converter: mscoco_keypoints
-      annotation_file: person_keypoints_val2017.json
+      annotation_file: human-pose-estimation-0001/labels.json
     annotation: mscoco_keypoints.pickle
     dataset_meta: mscoco_keypoints.json
     metrics:
       - name: AP
         type: coco_precision
         max_detections: 20
+
+  - name: ms_coco_single_keypoints
+    data_source: val2017
+    annotation_conversion:
+      converter: mscoco_single_keypoints
+      annotation_file: person_keypoints_val2017.json
+    annotation: mscoco_single_keypoints.pickle
+    dataset_meta: mscoco_single_keypoints.json
+    metrics:
+      - name: AP
+        type: coco_orig_keypoints_precision
 
   - name: imagenet_1000_classes
     annotation_conversion:
@@ -100,12 +462,12 @@ datasets:
     annotation: imagenet1000.pickle
     data_source: ILSVRC2012_img_val
     metrics:
-      - name: accuracy@top1
-        type: accuracy
-        top_k: 1
-      - name: accuracy@top5
-        type: accuracy
-        top_k: 5
+    - name: accuracy@top1
+      type: accuracy
+      top_k: 1
+    - name: acciracy@top5
+      type: accuracy
+      top_k: 5
 
   - name: imagenet_1000_classes_2015
     annotation_conversion:
@@ -114,12 +476,12 @@ datasets:
     annotation: imagenet1000_2015.pickle
     data_source: ILSVRC2012_img_val
     metrics:
-      - name: accuracy@top1
-        type: accuracy
-        top_k: 1
-      - name: accuracy@top5
-        type: accuracy
-        top_k: 5
+    - name: accuracy@top1
+      type: accuracy
+      top_k: 1
+    - name: acciracy@top5
+      type: accuracy
+      top_k: 5
 
   - name: imagenet_1001_classes
     annotation_conversion:
@@ -129,12 +491,12 @@ datasets:
     annotation: imagenet1001.pickle
     data_source: ILSVRC2012_img_val
     metrics:
-      - name: accuracy@top1
-        type: accuracy
-        top_k: 1
-      - name: accuracy@top5
-        type: accuracy
-        top_k: 5
+    - name: accuracy@top1
+      type: accuracy
+      top_k: 1
+    - name: acciracy@top5
+      type: accuracy
+      top_k: 5
 
   - name: VOC2007
     data_source: VOCdevkit/VOC2007/JPEGImages
@@ -143,6 +505,17 @@ datasets:
       annotations_dir: VOCdevkit/VOC2007/Annotations
       images_dir: VOCdevkit/VOC2007/JPEGImages
       imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+    annotation: voc07.pickle
+    dataset_meta: voc07.json
+
+  - name: VOC2007_without_background
+    data_source: VOCdevkit/VOC2007/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      annotations_dir: VOCdevkit/VOC2007/Annotations
+      images_dir: VOCdevkit/VOC2007/JPEGImages
+      imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+      has_background: False
     annotation: voc07.pickle
     dataset_meta: voc07.json
 
@@ -156,12 +529,12 @@ datasets:
     annotation: voc12.pickle
     dataset_meta: voc12.json
     postprocessing:
-      - type: resize_prediction_boxes
+    - type: resize_prediction_boxes
     metrics:
-      - type: map
-        integral: 11point
-        ignore_difficult: True
-        presenter: print_scalar
+    - type: map
+      integral: 11point
+      ignore_difficult: True
+      presenter: print_scalar
 
   - name: VOC2012_without_background
     annotation_conversion:
@@ -169,16 +542,11 @@ datasets:
       annotations_dir: VOCdevkit/VOC2012/Annotations
       images_dir: VOCdevkit/VOC2012/JPEGImages
       imageset_file: VOCdevkit/VOC2012/ImageSets/Main/val.txt
-    data_source: VOCdevkit/VOC2012/JPEGImages
-    annotation: voc12_without_background.pickle
+      has_background: False
+    data_source: VOCdevkit/VOC2012/JPEGImages/
+    segmentation_masks_source:  VOCdevkit/VOC2012/SegmentationClass/
+    annotation:   voc12_without_background.pickle
     dataset_meta: voc12_without_background.json
-    postprocessing:
-      - type: resize_prediction_boxes
-    metrics:
-      - type: map
-        integral: 11point
-        ignore_difficult: True
-        presenter: print_scalar
 
   - name: VOC2012_Segmentation
     annotation_conversion:
@@ -187,7 +555,7 @@ datasets:
       images_dir: VOCdevkit/VOC2012/JPEGImages/
       mask_dir: VOCdevkit/VOC2012/SegmentationClass/
     data_source: VOCdevkit/VOC2012/JPEGImages/
-    segmentation_masks_source:  VOCdevkit/VOC2012/SegmentationClass/
+    segmentation_masks_source: VOCdevkit/VOC2012/SegmentationClass/
     annotation: voc2012_segmentation.pickle
     dataset_meta: voc2012_segmentation.json
 
@@ -200,10 +568,10 @@ datasets:
     dataset_meta: wider.json
 
   - name: wider_without_bkgr
-    data_source: WIDER_val/images
+    data_source: WiderFace/WIDER_val/images
     annotation_conversion:
       converter: wider
-      annotation_file: wider_face_split/wider_face_val_bbx_gt.txt
+      annotation_file: WiderFace/wider_face_split/wider_face_val_bbx_gt.txt
       label_start: 0
     annotation: wider_0.pickle
     dataset_meta: wider_0.json
@@ -402,7 +770,7 @@ datasets:
     annotation_conversion:
       converter: lpr_txt
       annotation_file: Synthetic_Chinese_License_Plates/annotation
-      decoding_dictionary_file: dict
+      decoding_dictionary_file: Synthetic_Chinese_License_Plates/dict
     annotation: lpr.pickle
     dataset_meta: lpr.json
 
@@ -410,20 +778,6 @@ datasets:
       - type: resize
         dst_width: 94
         dst_height: 24
-
-
-  - name: image_retrieval
-    data_source: textile_crops
-    annotation_conversion:
-      converter: image_retrieval
-      data_dir: textile_crops
-      gallery_annotation_file: textile_crops/gallery/gallery.txt
-      queries_annotation_file: textile_crops/queries/quieries.txt
-    annotation: textile.pickle
-    dataset_meta: textile.json
-    preprocessing:
-      - type: resize
-        size: 224
 
   - name: lfw
     data_source: LFW/lfw
@@ -444,14 +798,6 @@ datasets:
       data_dir: ICDAR15_DET/gt
     annotation: icdar15_detection.pickle
 
-  - name: ICDAR2015_word_spotting
-    data_source: ICDAR15_DET/ch4_test_images
-    annotation_conversion:
-      converter: icdar_detection
-      word_spotting: True
-      data_dir: ICDAR15_DET/gt
-    annotation: icdar15_detection.pickle
-
   - name: ICDAR2013
     data_source: ICDAR13_REC/Challenge2_Test_Task3_Images
     annotation_conversion:
@@ -460,12 +806,13 @@ datasets:
     annotation: icdar13_recognition.pickle
     dataset_meta: icdar13_recognition.json
 
-  - name: market1501
-    data_source: Market-1501-v15.09.15
+  - name: ICDAR2015_word_spotting
+    data_source: ICDAR15_DET/ch4_test_images
     annotation_conversion:
-      converter: market1501_reid
-      data_dir: Market-1501-v15.09.15
-    annotation: market1501_reid.pickle
+      converter: icdar_detection
+      word_spotting: True
+      data_dir: ICDAR15_DET/gt
+    annotation: icdar15_detection_wird_spotting.pickle
 
   - name: veri776
     data_source: VeRi-776
@@ -475,6 +822,13 @@ datasets:
     annotation: veri776_reid.pickle
 
   - name: reid_dataset
+    data_source: Market-1501-v15.09.15
+    annotation_conversion:
+      converter: market1501_reid
+      data_dir: Market-1501-v15.09.15
+    annotation: market1501_reid.pickle
+
+  - name: market1501
     data_source: Market-1501-v15.09.15
     annotation_conversion:
       converter: market1501_reid
@@ -630,45 +984,14 @@ datasets:
       data_dir: cmu_panoptic_subset
     annotation: cmu_panoptic_keypoints.pickle
 
-  - name: kinetics-400
-    data_source: kinetics/frames_val
+  - name: product_detection
     annotation_conversion:
-      converter: clip_action_recognition
-      annotation_file: kinetics/kinetics_400.json
-      data_dir: kinetics/frames_val
-    annotation: kinetics_action_recognition.pickle
-    dataset_meta: kinetics_action_recognition.json
-
-  - name: kinetics-400-frames-79
-    data_source: kinetics/frames_val
-    annotation_conversion:
-      converter: clip_action_recognition
-      annotation_file: kinetics/kinetics_400.json
-      data_dir: kinetics/frames_val
-      clip_duration: 79
-    annotation: kinetics_action_recognition_79.pickle
-    dataset_meta: kinetics_action_recognition_79.json
-
-  - name: kinetics-400-frames-79-400
-    data_source: kinetics/frames_val
-    annotation_conversion:
-      converter: clip_action_recognition
-      annotation_file: kinetics/kinetics_400.json
-      data_dir: kinetics/frames_val
-      clip_duration: 79
-      temporal_stride: 1
-      num_samples: 400
-    annotation: kinetics_action_recognition_79_400.pickle
-    dataset_meta: kinetics_action_recognition_79_400.json
-
-  - name: driver_action_recognition_dataset
-    data_source: kinetics/frames_val
-    annotation_conversion:
-      converter: clip_action_recognition
-      annotation_file: kinetics/driver_action_recognition.json
-      data_dir: kinetics/frames_val
-    annotation: driver_action_recognition.pickle
-    dataset_meta: driver_action_recognition.json
+      converter: mscoco_detection
+      annotation_file: product_detection/annotation.json
+      has_background: True
+    annotation: product_detection.pickle
+    dataset_meta: product_detection.json
+    data_source: product_detection
 
   - name: BraTS
     data_source: BraTS
@@ -694,33 +1017,6 @@ datasets:
     annotation: brats2017.pickle
     dataset_meta: brats2017.json
 
-  - name: product_detection
-    annotation: product_detection.pickle
-    dataset_meta: product_detection.json
-    data_source: product_detection
-
-    metrics:
-      - type: coco_precision
-
-  - name: ms_coco_single_keypoints
-    data_source: val2017
-    annotation_conversion:
-      converter: mscoco_single_keypoints
-      annotation_file: person_keypoints_val2017.json
-    annotation: mscoco_single_keypoints.pickle
-    dataset_meta: mscoco_single_keypoints.json
-    metrics:
-      - name: AP
-        type: coco_orig_keypoints_precision
-
-  - name: CamVid
-    data_source: CamVid
-    annotation_conversion:
-      converter: camvid
-      annotation_file: CamVid/val.txt
-    annotation: camvid.pickle
-    dataset_meta: camvid.json
-
   - name: msasl-100
     data_source: msasl/global_crops
     annotation_conversion:
@@ -731,12 +1027,35 @@ datasets:
       clip_length: 16
     annotation: msasl_action_recognition.pickle
 
+  - name: mscoco_person_detection
+    data_source: val2017
+    annotation_conversion:
+      converter: mscoco_detection
+      annotation_file: person_keypoints_val2017.json
+      has_background: True
+      sort_annotations: True
+      use_full_label_map: True
+    annotation: mscoco_person_detection.pickle
+    dataset_meta: mscoco_person_detection.json
+
+  - name: voc_like
+    data_source: voc_like/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      imageset_file: voc_like/ImageSets/Main/val.txt
+      annotations_dir: voc_like/Annotations
+      images_dir: voc_like/JPEGImages
+      dataset_meta_file: voc_like/dataset_meta.json
+      has_background: False
+    annotation: voc_like/ali_test_new.pickle
+    dataset_meta: voc_like/ali_test_new.json
+
   - name: ReDWeb_V1
     data_source: ReDWeb_V1
     annotation_conversion:
       converter: redweb
       data_dir: ReDWeb_V1
-      annotation_file: ReDWeb_validation_360.txt
+      annotation_file: ReDWeb_V1/ReDWeb_validation_360.txt
     annotation: mono_depth.pickle
 
   - name: Kondate_nakayosi
@@ -787,8 +1106,44 @@ datasets:
       lower_case: true
       vocab_file: vocab.txt
 
+  - name: Kondate
+    data_source: Kondate/test_data
+    annotation_conversion:
+      converter: kondate_nakayosi_recognition
+      decoding_char_file: Kondate/kondate_nakayosi_char_list.txt
+      annotation_file: Kondate/test_img_id_gt.txt
+    annotation: kondate_recognition.pickle
+    dataset_meta: kondate_recognition.json
+
+  - name: wav-esc
+    data_source: esc-50/audio
+    annotation_conversion:
+      converter: esc
+      annotation_file: esc-50/meta/esc50.csv
+      fold: 4
+      audio_dir: esc-50/audio
+    annotation: wav_esc.pickle
+    reader: wav_reader
+
   - name: xnli1.0
     annotation: XNLI/bert_xnli_tf_record.pickle
     annotation_conversion:
-      converter: bert_xnli_tf_record
-      annotation_file: XNLI/eval.tf_record
+        converter: bert_xnli_tf_record
+        annotation_file: XNLI/eval.tf_record
+
+  - name: person_detection
+    data_source: Datatang_street_subway
+    annotation_conversion:
+      converter: datatang_street_subway
+      annotation_file: Datatang_street_subway/annotation_trainval.xml
+    annotation: datatang_street_subway.pickle
+    dataset_meta: datatang_street_subway.json
+
+  - name: barrier_vehicle_detection_dataset_index_class_2
+    data_source: BITVehicle/annotation_val/data
+    annotation_conversion:
+      converter: barrier_vehicle_detection
+      annotation_file: BITVehicle/annotation_val/annotation.json
+      index_of_class: 2
+    annotation: barrier_bitvehicle_index_of_class_2.pickle
+    dataset_meta: barrier_bitvehicle_index_of_class_2.json

@@ -422,6 +422,7 @@ datasets:
         use_full_label_map: False
     annotation: mscoco_detection_80cl_wo_bkgr.pickle
     dataset_meta: mscoco_detection_80cl_wo_bkgr.json
+    data_source: val2017
 
   - name: COCO2017_80cl_bkgr
     annotation_conversion:

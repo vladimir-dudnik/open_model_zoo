@@ -406,13 +406,31 @@ datasets:
 
   - name: ms_coco_detection_80_class_without_background
     annotation_conversion:
-      converter: mscoco_detection
-      annotation_file: instances_val2017.json
-      has_background: False
-      sort_annotations: True
-      use_full_label_map: False
-    annotation:  mscoco_det_80.pickle
-    dataset_meta:  mscoco_det_80.json
+        converter: mscoco_detection
+        annotation_file: instances_val2017.json
+        has_background: False
+        use_full_label_map: False
+    annotation: mscoco_detection_80cl_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_bkgr.json
+    data_source: val2017
+
+  - name: COCO2017_80cl_bkgr
+    annotation_conversion:
+        converter: mscoco_detection
+        annotation_file: instances_val2017.json
+        has_background: True
+        use_full_label_map: False
+    annotation: mscoco_detection_80cl_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_bkgr.json
+    data_source: val2017
+
+    postprocessing:
+      - type: resize_prediction_boxes
+    metrics:
+      - type: map
+        integral: 11point
+        ignore_difficult: True
+        presenter: print_scalar
 
   - name: ms_coco_keypoints
     data_source: human-pose-estimation-0001/images
@@ -508,6 +526,17 @@ datasets:
       annotations_dir: VOCdevkit/VOC2007/Annotations
       images_dir: VOCdevkit/VOC2007/JPEGImages
       imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+    annotation: voc07.pickle
+    dataset_meta: voc07.json
+
+  - name: VOC2007_without_background
+    data_source: VOCdevkit/VOC2007/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      annotations_dir: VOCdevkit/VOC2007/Annotations
+      images_dir: VOCdevkit/VOC2007/JPEGImages
+      imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+      has_background: False
     annotation: voc07.pickle
     dataset_meta: voc07.json
 

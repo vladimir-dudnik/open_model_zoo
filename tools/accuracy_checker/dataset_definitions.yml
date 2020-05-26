@@ -422,6 +422,15 @@ datasets:
         use_full_label_map: False
     annotation: mscoco_detection_80cl_wo_bkgr.pickle
     dataset_meta: mscoco_detection_80cl_wo_bkgr.json
+
+  - name: COCO2017_80cl_bkgr
+    annotation_conversion:
+        converter: mscoco_detection
+        annotation_file: instances_val2017.json
+        has_background: True
+        use_full_label_map: False
+    annotation: mscoco_detection_80cl_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_bkgr.json
     data_source: val2017
 
     postprocessing:
@@ -547,6 +556,17 @@ datasets:
       annotations_dir: VOCdevkit/VOC2007/Annotations
       images_dir: VOCdevkit/VOC2007/JPEGImages
       imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+    annotation: voc07.pickle
+    dataset_meta: voc07.json
+
+  - name: VOC2007_without_background
+    data_source: VOCdevkit/VOC2007/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      annotations_dir: VOCdevkit/VOC2007/Annotations
+      images_dir: VOCdevkit/VOC2007/JPEGImages
+      imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+      has_background: False
     annotation: voc07.pickle
     dataset_meta: voc07.json
 
@@ -829,14 +849,6 @@ datasets:
       data_dir: ICDAR15_DET/gt
     annotation: icdar15_detection.pickle
 
-  - name: ICDAR2015_word_spotting
-    data_source: ICDAR15_DET/ch4_test_images
-    annotation_conversion:
-      converter: icdar_detection
-      word_spotting: True
-      data_dir: ICDAR15_DET/gt
-    annotation: icdar15_detection.pickle
-
   - name: ICDAR2013_detection
     data_source: ICDAR13_DET
     annotation_conversion:
@@ -852,12 +864,27 @@ datasets:
     annotation: icdar13_recognition.pickle
     dataset_meta: icdar13_recognition.json
 
+  - name: ICDAR2015_word_spotting
+    data_source: ICDAR15_DET/ch4_test_images
+    annotation_conversion:
+      converter: icdar_detection
+      word_spotting: True
+      data_dir: ICDAR15_DET/gt
+    annotation: icdar15_detection_wird_spotting.pickle
+
   - name: veri776
     data_source: VeRi-776
     annotation_conversion:
       converter: veri776_reid
       data_dir: VeRi-776
     annotation: veri776_reid.pickle
+
+  - name: market1501
+    data_source: Market-1501-v15.09.15
+    annotation_conversion:
+      converter: market1501_reid
+      data_dir: Market-1501-v15.09.15
+    annotation: market1501_reid.pickle
 
   - name: market1501
     data_source: Market-1501-v15.09.15

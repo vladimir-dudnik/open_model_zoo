@@ -51,8 +51,5 @@ models:
       include_boundaries: true
       allow_multiple_matches_per_ignored: true
       use_filtered_tp: false
-<<<<<<< 1b6ff8c38028bb810cd96bb12eadbeee318089a4
 
 global_definitions: ../dataset_definitions.yml
-=======
->>>>>>> yolo-v3 person-vehicle-bike

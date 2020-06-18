@@ -4,21 +4,10 @@ models:
 
     launchers:
       - framework: dlsdk
-        tags:
-          - FP16
-        model: public/aclnet/FP16/aclnet.xml
-        weights: public/aclnet/FP16/aclnet.bin
         adapter: classification
 
     datasets:
       - name: des-53
-        data_source: des-53/audio_16k
-        annotation_conversion:
-          converter: des
-          annotation_file: des-53/meta/validation.csv
-          audio_dir: des-53/audio_16k
-        annotation: des-53.pickle
-        reader: wav_reader
 
         preprocessing:
           - type: clip_audio

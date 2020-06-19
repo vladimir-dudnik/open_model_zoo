@@ -4,6 +4,10 @@ models:
 
     launchers:
       - framework: dlsdk
+        tags:
+          - FP16
+        model: public/aclnet/FP16/aclnet.xml
+        weights: public/aclnet/FP16/aclnet.bin
         adapter: classification
 
     datasets:

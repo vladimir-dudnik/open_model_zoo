@@ -97,6 +97,7 @@ You may refer to `-h, --help` to full list of command line options. Some optiona
 - `--num_requests` number requests for async execution. Allows override provided in config info. Default is `AUTO`
 - `--model_attributes` directory with additional models attributes.
 - `--subsample_size` dataset subsample size.
+- `--shuffle` allow shuffle annotation during creation a subset if subsample_size argument is provided. Default is `True`.
 
 You are also able to replace some command line arguments with environment variables for path prefixing. Supported following list of variables:
 * `DATA_DIR` -  equivalent of `-s`, `--source`.
@@ -159,6 +160,8 @@ If your dataset data is a well-known competition problem (COCO, Pascal VOC, ...)
 it is reasonable to declare it in some global configuration file (*definition* file). This way in your local configuration file you can provide only
 `name` and all required steps will be picked from global one. To pass path to this global configuration use `--definition` argument of CLI.
 
+If you want to evaluate models using prepared config files and well-known datasets, you need to organize folders with validation datasets in a certain way. More detailed information about dataset preparation you can find in [Dataset Preparation Guide](../../datasets.md).
+
 Each dataset must have:
 
 - `name` - unique identifier of your model/topology.
@@ -169,6 +172,7 @@ And optionally:
 - `preprocessing`: list of preprocessing steps applied to input data. If you want calculated metrics to match reported, you must reproduce preprocessing from canonical paper of your topology or ask topology author about required steps.
 - `postprocessing`: list of postprocessing steps.
 - `reader`: approach for data reading. Default reader is `opencv_imread`.
+- `segmentation_masks_source` - path to directory where gt masks for semantic segmentation task stored.
 
 Also it must contain data related to annotation.
 You can convert annotation inplace using:
@@ -245,4 +249,4 @@ Typical workflow for testing new model include:
 
 Standard Accuracy Checker validation pipeline: Annotation Reading -> Data Reading -> Preprocessing -> Inference -> Postprocessing -> Metrics.
 In some cases it can be unsuitable (e.g. if you have sequence of models). You are able to customize validation pipeline using own evaluator.
-More details about custom evaluations can be found in [related section](custom_evaluators/README.md).
+More details about custom evaluations can be found in [related section](accuracy_checker/evaluators/custom_evaluators/README.md).

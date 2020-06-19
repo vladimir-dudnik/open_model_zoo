@@ -12,6 +12,13 @@ models:
 
     datasets:
       - name: des-53
+        data_source: des-53/audio_16k
+        annotation_conversion:
+          converter: des
+          annotation_file: des-53/meta/validation.csv
+          audio_dir: des-53/audio_16k
+        annotation: des-53.pickle
+        reader: wav_reader
 
         preprocessing:
           - type: clip_audio

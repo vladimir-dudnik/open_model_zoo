@@ -95,10 +95,10 @@ NATIVE_DEMOS = [
         single_option_cases('-m_pa', None, ModelArg('person-attributes-recognition-crossroad-0230')),
         single_option_cases('-m_reid',
             None,
-            ModelArg('person-reidentification-retail-0031'),
             ModelArg('person-reidentification-retail-0248'),
-            ModelArg('person-reidentification-retail-0249'),
-            ModelArg('person-reidentification-retail-0300')),
+            ModelArg('person-reidentification-retail-0265'),
+            ModelArg('person-reidentification-retail-0267'),
+            ModelArg('person-reidentification-retail-0270')),
     )),
 
     NativeDemo(subdirectory='gaze_estimation_demo',
@@ -112,6 +112,7 @@ NATIVE_DEMOS = [
             '-m_fd': ModelArg('face-detection-adas-0001'),
             '-m_hp': ModelArg('head-pose-estimation-adas-0001'),
             '-m_lm': ModelArg('facial-landmarks-35-adas-0002'),
+            '-m_es': ModelArg('open-closed-eye-0001'),
         }),
     )),
 
@@ -211,7 +212,12 @@ NATIVE_DEMOS = [
         ],
     )),
 
-    # TODO: object_detection_demo_yolov3_async: no models.lst
+    NativeDemo(subdirectory='object_detection_demo_yolov3_async', device_keys=['-d'], test_cases=combine_cases(
+        TestCase(options={'--no_show': None,
+            **MONITORS,
+            '-i': DataPatternArg('object-detection-demo-ssd-async')}),
+        TestCase(options={'-m': ModelArg('yolo-v3-tf')})
+    )),
 
     NativeDemo('pedestrian_tracker_demo', device_keys=['-d_det', '-d_reid'], test_cases=combine_cases(
         TestCase(options={'-no_show': None,
@@ -222,10 +228,10 @@ NATIVE_DEMOS = [
             TestCase(options={'-m_det': ModelArg('person-detection-retail-0013')}),
         ],
         single_option_cases('-m_reid',
-            ModelArg('person-reidentification-retail-0031'),
             ModelArg('person-reidentification-retail-0248'),
-            ModelArg('person-reidentification-retail-0249'),
-            ModelArg('person-reidentification-retail-0300')),
+            ModelArg('person-reidentification-retail-0265'),
+            ModelArg('person-reidentification-retail-0267'),
+            ModelArg('person-reidentification-retail-0270')),
     )),
 
     NativeDemo(subdirectory='security_barrier_camera_demo',
@@ -370,17 +376,17 @@ PYTHON_DEMOS = [
             ModelArg('instance-segmentation-security-1025')),
     )),
 
-    PythonDemo(subdirectory='multi_camera_multi_person_tracking', device_keys=['-d'], test_cases=combine_cases(
+    PythonDemo(subdirectory='multi_camera_multi_target_tracking', device_keys=['-d'], test_cases=combine_cases(
         TestCase(options={'--no_show': None,
             **MONITORS,
-            '-i': [DataPatternArg('multi-camera-multi-person-tracking'),
-                DataPatternArg('multi-camera-multi-person-tracking/repeated')],
+            '-i': [DataPatternArg('multi-camera-multi-target-tracking'),
+                DataPatternArg('multi-camera-multi-target-tracking/repeated')],
             '-m': ModelArg('person-detection-retail-0013')}),
         single_option_cases('--m_reid',
-            ModelArg('person-reidentification-retail-0031'),
             ModelArg('person-reidentification-retail-0248'),
-            ModelArg('person-reidentification-retail-0249'),
-            ModelArg('person-reidentification-retail-0300')),
+            ModelArg('person-reidentification-retail-0265'),
+            ModelArg('person-reidentification-retail-0267'),
+            ModelArg('person-reidentification-retail-0270')),
     )),
 
     PythonDemo(subdirectory='object_detection_demo_ssd_async', device_keys=['-d'], test_cases=combine_cases(

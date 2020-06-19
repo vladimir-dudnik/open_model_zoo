@@ -86,6 +86,7 @@ Accuracy Checker supports following list of annotation converters and specific f
   * `images_dir` - path to directory with images related to devkit root (default JPEGImages).
   * `mask_dir` - path to directory with ground truth segmentation masks related to devkit root (default SegmentationClass).
   * `dataset_meta_file` - path path to json file with dataset meta (e.g. label_map, color_encoding).Optional, more details in [Customizing dataset meta](#customizing-dataset-meta) section.
+**Note: since OpenVINO 2020.4 converter behaviour changed. `data_source` parameter of dataset should contains directory for images only, if you have segmentation mask in separated location, please use `segmentation_masks_source` for specifying gt masks location.**
 * `mscoco_detection` - converts MS COCO dataset for object detection task to `DetectionAnnotation`.
   * `annotation_file` - path ot annotation file in json format.
   * `has_background` - allows convert dataset with/without adding background_label. Accepted values are True or False. (default is False).
@@ -136,6 +137,8 @@ Accuracy Checker supports following list of annotation converters and specific f
   * `data_dir` - path to data directory, where gallery (`bbox_test`) and `query` subdirectories are located.
 * `market1501_reid` - converts Market1501 person reidentification dataset to `ReidentificationAnnotation`.
   * `data_dir` - path to data directory, where gallery (`bounding_box_test`) and `query` subdirectories are located.
+* `veri776_reid` - converts VeRi776 vehicle reidentification dataset to `ReidentificationAnnotation`.
+  * `data_dir` - path to data directory, where gallery (`image_test`) and `image_query` subdirectories are located.
 * `image_processing` - converts dataset for common single image processing tasks (e.g. image denoising, style transferring) to `ImageProcessingAnnotation`. This converter is suitable for tasks where model output produced on specific input image should be compared with target image.
   * `data_dir` - path to folder, where images in low and high resolution are located.
   * `input_suffix` - input file name's suffix (default `in`).
@@ -196,6 +199,7 @@ Accuracy Checker supports following list of annotation converters and specific f
   * `image_postfix` - postfix part for mask file names (optional, default is `.png`).
   * `mask_loader` - the way how GT mask should be loaded. Supported methods: `pillow`, `opencv`, `nifti`, `numpy`, `scipy`.
   * `dataset_meta_file` - path to json file with prepared dataset meta info. It should contains `label_map` key with dictionary in format class_id: class_name and optionally `segmentation_colors` (if your dataset uses color encoding). Segmentation colors is a list of channel-wise values for each class. (e.g. if your dataset has 3 classes in BGR colors, segmentation colors for it will looks like: `[[255, 0, 0], [0, 255, 0], [0, 0, 255]]`). (Optional, you can provide self-created file as `dataset_meta` in your config).
+**Note: since OpenVINO 2020.4 converter behaviour changed. `data_source` parameter of dataset should contains directory for images only, if you have segmentation mask in separated location, please use `segmentation_masks_source` for specifying gt masks location.**
 * `camvid` - converts CamVid dataset format to `SegmentationAnnotation`.
   * `annotation_file` - file in txt format which contains list of validation pairs (`<path_to_image>` `<path_to_annotation>` separated by space)
   * `dataset_meta_file` - path path to json file with dataset meta (e.g. label_map, color_encoding).Optional, more details in [Customizing dataset meta](#customizing-dataset-meta) section.
@@ -302,6 +306,10 @@ Accuracy Checker supports following list of annotation converters and specific f
 * `inpainting` - converts images to `ImageInpaintingAnnotation`.
   * `images_dir` - path to images directory.
   * `masks_dir` - path to mask dataset to be used for inpainting (Optional).
+* `aflw2000_3d` - converts [AFLW2000-3D](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm) dataset for 3d facial landmarks regression task to `FacialLandmarks3DAnnotation`.
+   * `data_dir` - directory, where input images and annotation files in matlab format stored.
+* `style_transfer` - converts images to `StyleTransferAnnotation`.
+  * `images_dir` - path to images directory.
 
 ### Customizing dataset meta
 There are situations when we need customize some default dataset parameters (e.g. replace original dataset label map with own.)

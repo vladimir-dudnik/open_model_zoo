@@ -27,6 +27,7 @@ from .logging import print_info, add_file_handler, exception
 from .evaluators import ModelEvaluator, PipeLineEvaluator, ModuleEvaluator
 from .progress_reporters import ProgressReporter
 from .utils import get_path, cast_to_bool, check_file_existence
+from . import __version__
 
 EVALUATION_MODE = {
     'models': ModelEvaluator,
@@ -245,6 +246,15 @@ def build_arguments_parser():
         required=False,
         type=str
     )
+    parser.add_argument(
+        '--shuffle', help="Allow shuffle annotation during creation a subset",
+        required=False,
+        type=cast_to_bool
+    )
+    parser.add_argument(
+        '--version', action='version', version='%(prog)s {version}'.format(version=__version__),
+        help='show tool version and exit'
+    )
 
     return parser
 
@@ -266,7 +276,7 @@ def main():
             processing_info = evaluator_class.get_processing_info(config_entry)
             print_processing_info(*processing_info)
             evaluator = evaluator_class.from_configs(config_entry)
-            evaluator.process_dataset(args.stored_predictions, progress_reporter=progress_reporter)
+            evaluator.process_dataset(stored_predictions=args.stored_predictions, progress_reporter=progress_reporter)
             metrics_results, _ = evaluator.extract_metrics_results(
                 print_results=True, ignore_results_formatting=args.ignore_result_formatting
             )

@@ -49,8 +49,8 @@ ADAPTERS_PATHS = {
 }
 
 ANNOTATION_CONVERSION_PATHS = {
-    'vocab_file': ['model_attributes', 'models'],
-    'merges_file': ['model_attributes', 'models']
+    'vocab_file': ['model_attributes', 'source', 'models'],
+    'merges_file': ['model_attributes', 'source', 'models']
 }
 
 LIST_ENTRIES_PATHS = {
@@ -389,7 +389,10 @@ class ConfigReader:
 
     @staticmethod
     def _provide_cmd_arguments(arguments, config, mode):
-        def _add_subsample_size_arg(dataset_entry):
+        def _add_subset_specific_arg(dataset_entry):
+            if 'shuffle' in arguments and arguments.shuffle is not None:
+                dataset_entry['shuffle'] = arguments.shuffle
+
             if 'subsample_size' in arguments and arguments.subsample_size is not None:
                 dataset_entry['subsample_size'] = arguments.subsample_size
 
@@ -417,7 +420,7 @@ class ConfigReader:
                     merge_dlsdk_launcher_args(arguments, launcher_entry, update_launcher_entry)
                 model['launchers'] = provide_models(model['launchers'])
                 for dataset_entry in model['datasets']:
-                    _add_subsample_size_arg(dataset_entry)
+                    _add_subset_specific_arg(dataset_entry)
 
         def merge_pipelines(config, arguments, update_launcher_entry):
             for pipeline in config['pipelines']:
@@ -425,7 +428,7 @@ class ConfigReader:
                     if 'launcher' in stage:
                         merge_dlsdk_launcher_args(arguments, stage['launcher'], update_launcher_entry)
                     if 'dataset' in stage:
-                        _add_subsample_size_arg(stage['dataset'])
+                        _add_subset_specific_arg(stage['dataset'])
 
         def merge_modules(config, arguments, update_launcher_entry):
             for evaluation in config['evaluations']:
@@ -441,7 +444,7 @@ class ConfigReader:
                 for launcher in module_config['launchers']:
                     merge_dlsdk_launcher_args(arguments, launcher, update_launcher_entry)
                 for dataset in module_config['datasets']:
-                    _add_subsample_size_arg(dataset)
+                    _add_subset_specific_arg(dataset)
 
         functors_by_mode = {
             'models': merge_models,
@@ -593,13 +596,14 @@ class ConfigReader:
 
     @staticmethod
     def convert_paths(config):
+        mode = 'evaluations' if 'evaluations' in config else 'models'
         definitions = os.environ.get(DEFINITION_ENV_VAR)
         if definitions:
             definitions = read_yaml(Path(definitions))
             ConfigReader._prepare_global_configs(definitions)
-            config = ConfigReader._merge_configs(definitions, config, {}, 'models')
+            config = ConfigReader._merge_configs(definitions, config, {}, mode)
         if COMMAND_LINE_ARGS_AS_ENV_VARS['source'] in os.environ:
-            ConfigReader._merge_paths_with_prefixes({}, config, 'models')
+            ConfigReader._merge_paths_with_prefixes({}, config, mode)
 
         def convert_launcher_paths(launcher_config):
             for key, path in launcher_config.items():
@@ -630,12 +634,24 @@ class ConfigReader:
                     continue
                 dataset_config[key] = Path(path)
 
-        for model in config['models']:
-            for launcher_config in model['launchers']:
-                convert_launcher_paths(launcher_config)
-            datasets = model['datasets'].values() if isinstance(model['datasets'], dict) else model['datasets']
-            for dataset_config in datasets:
-                convert_dataset_paths(dataset_config)
+        if mode == 'models':
+            for model in config['models']:
+                for launcher_config in model['launchers']:
+                    convert_launcher_paths(launcher_config)
+                datasets = model['datasets'].values() if isinstance(model['datasets'], dict) else model['datasets']
+                for dataset_config in datasets:
+                    convert_dataset_paths(dataset_config)
+        else:
+            for evaluation in config['evaluations']:
+                module_config = evaluation.get('module_config', {})
+                for launcher_config in module_config.get('launchers', []):
+                    convert_launcher_paths(launcher_config)
+                d_config = module_config.get('datasets')
+                if d_config:
+                    datasets = d_config.values() if isinstance(d_config, dict) else d_config
+                    for dataset_config in datasets:
+                        convert_dataset_paths(dataset_config)
+
         return config
 
 

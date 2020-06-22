@@ -1,5 +1,5 @@
 models:
-- name: person-vehicle-bike-detection-crossroad-yolov3-inputres1280-1024
+- name: person-vehicle-bike-detection-crossroad-yolov3-1024
   launchers:
   - framework: dlsdk
     adapter:

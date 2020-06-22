@@ -1,0 +1,26 @@
+models:
+  - name: inception-resnet-v2-caffe
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   public/inception-resnet-v2/FP32/inception-resnet-v2.xml
+        weights: public/inception-resnet-v2/FP32/inception-resnet-v2.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   public/inception-resnet-v2/FP16/inception-resnet-v2.xml
+        weights: public/inception-resnet-v2/FP16/inception-resnet-v2.bin
+        adapter: classification
+
+    datasets:
+      - name: imagenet_1001_classes
+        preprocessing:
+          - type: resize
+            size: 300
+          - type: crop
+            size: 299
+
+global_definitions: ../dataset_definitions.yml

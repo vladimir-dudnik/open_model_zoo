@@ -1,0 +1,37 @@
+# model-zoo-models-private
+models:
+  - name: aclnet-int8
+
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model: public/aclnet-int8/FP16-INT8/aclnet-int8.xml
+        weights: public/aclnet-int8/FP16-INT8/aclnet-int8.bin
+        adapter: classification
+
+    datasets:
+      - name: des-53
+        data_source: des-53/audio_16k
+        annotation_conversion:
+          converter: des
+          annotation_file: des-53/meta/validation.csv
+          audio_dir: des-53/audio_16k
+        annotation: des-53.pickle
+        reader: wav_reader
+
+        preprocessing:
+          - type: clip_audio
+            duration: 1
+            overlap: 50%
+          - type: audio_normalization
+
+        metrics:
+          - type: accuracy
+            name: top@1
+            top_k: 1
+          - type: accuracy
+            name: top@5
+            top_k: 5
+
+global_definitions: ../dataset_definitions.yml

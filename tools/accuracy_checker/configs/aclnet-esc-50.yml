@@ -1,6 +1,6 @@
 # model-zoo-models-private
 models:
-  - name: aclnet
+  - name: aclnet-esc-50
 
     launchers:
       - framework: dlsdk

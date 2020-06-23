@@ -1,34 +1,34 @@
 # model-zoo-models-private
 models:
-  - name: aclnet
+  - name: aclnet-esc-50
 
     launchers:
       - framework: dlsdk
         tags:
           - FP32
-        model:   public/aclnet/FP32/aclnet.xml
-        weights: public/aclnet/FP32/aclnet.bin
+        model:   public/aclnet-esc-50/FP32/aclnet-esc-50.xml
+        weights: public/aclnet-esc-50/FP32/aclnet-esc-50.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP16
-        model:   public/aclnet/FP16/aclnet.xml
-        weights: public/aclnet/FP16/aclnet.bin
+        model:   public/aclnet-esc-50/FP16/aclnet-esc-50.xml
+        weights: public/aclnet-esc-50/FP16/aclnet-esc-50.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP32-INT8
-        model:   public/aclnet/FP32-INT8/aclnet.xml
-        weights: public/aclnet/FP32-INT8/aclnet.bin
+        model:   public/aclnet-esc-50/FP32-INT8/aclnet-esc-50.xml
+        weights: public/aclnet-esc-50/FP32-INT8/aclnet-esc-50.bin
         adapter: classification
 
       - framework: dlsdk
         tags:
           - FP16-INT8
-        model:   public/aclnet/FP16-INT8/aclnet.xml
-        weights: public/aclnet/FP16-INT8/aclnet.bin
+        model:   public/aclnet-esc-50/FP16-INT8/aclnet-esc-50.xml
+        weights: public/aclnet-esc-50/FP16-INT8/aclnet-esc-50.bin
         adapter: classification
 
     datasets:

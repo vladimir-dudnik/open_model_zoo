@@ -1,0 +1,41 @@
+models:
+  - name: resnet-152
+    launchers:
+      - framework: dlsdk
+        tags:
+          - FP32
+        model:   public/resnet-152/FP32/resnet-152.xml
+        weights: public/resnet-152/FP32/resnet-152.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP16
+        model:   public/resnet-152/FP16/resnet-152.xml
+        weights: public/resnet-152/FP16/resnet-152.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP32-INT8
+        model:   public/resnet-152/FP32-INT8/resnet-152.xml
+        weights: public/resnet-152/FP32-INT8/resnet-152.bin
+        adapter: classification
+
+      - framework: dlsdk
+        tags:
+          - FP16-INT8
+        model:   public/resnet-152/FP16-INT8/resnet-152.xml
+        weights: public/resnet-152/FP16-INT8/resnet-152.bin
+        adapter: classification
+
+    datasets:
+      - name: imagenet_1000_classes
+        preprocessing:
+          - type: resize
+            size: 256
+            aspect_ratio_scale: greater
+          - type: crop
+            size: 224
+
+global_definitions: ../dataset_definitions.yml

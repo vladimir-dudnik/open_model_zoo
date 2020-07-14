@@ -1,0 +1,20 @@
+models:
+- name: resnet-152
+  launchers:
+  - framework: dlsdk
+    adapter: classification
+  datasets:
+  - name: imagenet_1000_classes
+    preprocessing:
+    - type: resize
+      size: 256
+      aspect_ratio_scale: greater
+    - type: crop
+      size: 224
+    metrics:
+    - name: accuracy@top1
+      type: accuracy
+      top_k: 1
+    - name: acciracy@top5
+      type: accuracy
+      top_k: 5

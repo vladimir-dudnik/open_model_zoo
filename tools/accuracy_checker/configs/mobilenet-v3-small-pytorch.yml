@@ -1,0 +1,26 @@
+models:
+  - name: mobilenet-v3-small-pytorch
+    launchers:
+      - framework: dlsdk
+        adapter: classification
+
+    datasets:
+      - name: imagenet_1000_classes
+        preprocessing:
+        - type: resize
+          size: 256
+          aspect_ratio_scale: greater
+          use_pillow: true
+          interpolation: BILINEAR
+        - type: crop
+          use_pillow: true
+          size: 224
+
+        metrics:
+          - name: accuracy @ top1
+            type: accuracy
+            top_k: 1
+
+          - name: accuracy @ top5
+            type: accuracy
+            top_k: 5

@@ -1,0 +1,25 @@
+models:
+  - name: peleenet
+
+    launchers:
+      - framework: dlsdk
+        adapter: ssd
+
+    datasets:
+      - name: VOC2007
+
+        preprocessing:
+          - type: resize
+            dst_width: 304
+            dst_height: 304
+
+        postprocessing:
+          - type: resize_prediction_boxes
+
+        metrics:
+          - type: map
+            integral: 11point
+            overlap_threshold: 0.5
+            ignore_difficult: True
+
+global_definitions: ../dataset_definitions.yml

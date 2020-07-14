@@ -1,0 +1,28 @@
+models:
+  - name: vas-person-vehicle-detection-stage2
+    launchers:
+    - framework: dlsdk
+      adapter: person_vehilce_detection_refinement
+      allow_reshape_input: true
+    datasets:
+    - name: mapillary
+      data_source: mapillary/validation/images
+      reader: opencv_imread
+      annotation_conversion:
+        converter: mapillary_detection_converter
+        annotation_dir: mapillary/validation/annotations
+        valid_gt_threshold: 0.02
+        stage1_detections_file: vas_pickle/pvd_stage1_candidates.pickle
+      preprocessing:
+        - type: candidate_crop
+          scale_width: 1.2
+          scale_height: 1.2
+        - type: resize
+          dst_width: 96
+          dst_height: 96
+          interpolation: NEAREST
+      metrics:
+      - type: map
+        overlap_threshold: 0.5
+        include_boundaries: false
+        overlap_method: iou

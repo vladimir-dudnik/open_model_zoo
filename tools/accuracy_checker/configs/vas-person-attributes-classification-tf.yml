@@ -1,0 +1,72 @@
+models:
+  - name: vas-person-attributes-classification
+    launchers:
+    - framework: dlsdk
+      adapter:
+        type: attribute_classification
+        output_layer_map:
+          prob/age: age
+          prob/gender: gender
+          prob/hat: hat
+          prob/sleeves: sleeves
+          prob/lowerclothing: lowerclothing
+          prob/backpack: backpack
+          prob/bag: bag
+          prob/color_top: color_top
+          prob/color_bottom: color_bottom
+    datasets:
+    - name: person_27_attributes
+      data_source: Market1501-person-reidentification/Market-1501-v15.09.15
+      reader: opencv_imread
+
+      annotation_conversion:
+        converter: market15_person_attributes_27
+        annotation_file: Market1501-person-attributes/Market-1501_Attribute/market_attribute.mat
+        images_dir: Market1501-person-reidentification/Market-1501-v15.09.15/gt_bbox
+      
+      preprocessing:
+      - type: resize
+        interpolation: Linear
+        dst_width: 96
+        dst_height: 192
+      
+      metrics:
+      - name: accuracy
+        type: attribute_accuracy
+        attributes:
+          - age
+          - gender
+          - hat
+          - sleeves
+          - lowerclothing
+          - backpack
+          - bag
+          - color_top
+          - color_bottom
+        presenter: print_vector
+      - name: precision
+        type: attribute_precision
+        attributes:
+          - age
+          - gender
+          - hat
+          - sleeves
+          - lowerclothing
+          - backpack
+          - bag
+          - color_top
+          - color_bottom
+        presenter: print_vector
+      - name: recall
+        type: attribute_recall
+        attributes:
+          - age
+          - gender
+          - hat
+          - sleeves
+          - lowerclothing
+          - backpack
+          - bag
+          - color_top
+          - color_bottom
+        presenter: print_vector

@@ -1,0 +1,33 @@
+models:
+  - name: bert_xnli
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: bert_classification
+          classification_out: loss/cls_logits/Add
+          num_classes: 3
+        inputs:
+          - name: input_ids
+            type: INPUT
+            value: input_ids
+          - name: input_mask
+            type: INPUT
+            value: input_mask
+          - name: segment_ids
+            type: INPUT
+            value: segment_ids
+
+    datasets:
+      - name: xnli1.0
+        reader:
+          type: annotation_features_extractor
+          features:
+            - input_ids
+            - input_mask
+            - segment_ids
+        metrics:
+          - name: top1
+            type: accuracy
+            top_k: 1
+
+global_definitions: ../dataset_definitions.yml

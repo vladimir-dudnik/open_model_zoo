@@ -1,0 +1,19 @@
+models:
+  - name: refinedet-vgg16
+    launchers:
+      - framework: dlsdk
+        adapter: ssd
+    datasets:
+      - name: ms_coco_detection_80_class_with_backgound
+        preprocessing:
+          - type: resize
+            size: 320
+        postprocessing:
+          - type: resize_prediction_boxes
+        metrics:
+          - type: map
+            integral: 11point
+            ignore_difficult: true
+            presenter: print_scalar
+          - type: coco_precision
+            max_detections: 100

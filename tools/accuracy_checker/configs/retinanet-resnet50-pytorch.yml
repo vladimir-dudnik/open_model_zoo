@@ -1,0 +1,35 @@
+models:
+  - name: retinanet-resnet50-pytorch
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: retinanet
+          loc_out: Concat_317
+          class_out: Concat_473
+
+    datasets:
+      - name: ms_coco_detection_80_class_without_backgound
+        preprocessing:
+          - type: resize
+            aspect_ratio_scale: frcnn_keep_aspect_ratio
+            size: 1024
+          - type: padding
+            size: 1024
+            pad_type: right_bottom
+
+        postprocessing:
+          - type: faster_rcnn_postprocessing_resize
+            size: 1024
+          - type: clip_boxes
+            size: 1024
+            apply_to: prediction
+          - type: nms
+          - type: filter
+            apply_to: prediction
+            min_confidence: 0.05
+            remove_filtered: True
+
+        metrics:
+          - type: coco_orig_precision
+
+global_definitions: ../dataset_definitions.yml

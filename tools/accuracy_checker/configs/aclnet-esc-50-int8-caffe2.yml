@@ -1,0 +1,24 @@
+# model-zoo-models-private
+models:
+  - name: aclnet-esc-50-int8
+
+    launchers:
+      - framework: dlsdk
+        adapter: classification
+
+    datasets:
+      - name: des-53
+
+        preprocessing:
+          - type: clip_audio
+            duration: 1
+            overlap: 50%
+          - type: audio_normalization
+
+        metrics:
+          - type: accuracy
+            name: top@1
+            top_k: 1
+          - type: accuracy
+            name: top@5
+            top_k: 5

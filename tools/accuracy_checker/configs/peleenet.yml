@@ -1,5 +1,6 @@
 models:
   - name: peleenet
+
     launchers:
       - framework: dlsdk
         tags:

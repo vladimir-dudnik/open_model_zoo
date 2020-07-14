@@ -1,0 +1,17 @@
+models:
+- name: face-reidentification-retail-0095
+  launchers:
+  - framework: dlsdk
+    adapter: reid
+
+  datasets:
+  - name: lfw
+    data_source: LFW/lfw
+    annotation: lfw.pickle
+    preprocessing:
+    - type: point_alignment
+      size: 400
+    - type: resize
+      size: 128
+    metrics:
+    - type: pairwise_accuracy_subsets

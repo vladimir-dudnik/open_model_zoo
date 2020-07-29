@@ -17,7 +17,8 @@ models:
           annotation_nums: 200
           stage1_detected_faces_file: vas_pickle/fd_stage1_candidates.pickle
       preprocessing:
-      - type: candidate_crop
+      #- type: face_patch
+      - type: candidate_crop #after https://github.com/opencv/open_model_zoo/pull/1278
         scale_width: 1.5
         scale_height: 1.5
       - type: resize
@@ -29,4 +30,3 @@ models:
         overlap: 0.4
         relative_size: 0.25
         presenter: print_scalar
-

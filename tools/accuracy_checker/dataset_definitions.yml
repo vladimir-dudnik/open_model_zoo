@@ -410,8 +410,8 @@ datasets:
         annotation_file: instances_val2017.json
         has_background: False
         use_full_label_map: False
-    annotation: mscoco_detection_80cl_bkgr.pickle
-    dataset_meta: mscoco_detection_80cl_bkgr.json
+    annotation: mscoco_detection_80cl_without_bkgr.pickle
+    dataset_meta: mscoco_detection_80cl_without_bkgr.json
     data_source: val2017
 
   - name: COCO2017_80cl_bkgr
@@ -497,6 +497,27 @@ datasets:
     - name: acciracy@top5
       type: accuracy
       top_k: 5
+
+  - name: VOC2007
+    data_source: VOCdevkit/VOC2007/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      annotations_dir: VOCdevkit/VOC2007/Annotations
+      images_dir: VOCdevkit/VOC2007/JPEGImages
+      imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+    annotation: voc07.pickle
+    dataset_meta: voc07.json
+
+  - name: VOC2007_without_background
+    data_source: VOCdevkit/VOC2007/JPEGImages
+    annotation_conversion:
+      converter: voc_detection
+      annotations_dir: VOCdevkit/VOC2007/Annotations
+      images_dir: VOCdevkit/VOC2007/JPEGImages
+      imageset_file: VOCdevkit/VOC2007/ImageSets/Main/test.txt
+      has_background: False
+    annotation: voc07.pickle
+    dataset_meta: voc07.json
 
   - name: VOC2007
     data_source: VOCdevkit/VOC2007/JPEGImages
@@ -1072,7 +1093,7 @@ datasets:
       has_background: False
     annotation: voc_like/ali_test_new.pickle
     dataset_meta: voc_like/ali_test_new.json
-
+    
   - name: ReDWeb_V1
     data_source: ReDWeb_V1
     annotation_conversion:

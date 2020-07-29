@@ -1,0 +1,44 @@
+models:
+  - name: vas-facial-attributes-classification
+    launchers:
+    - framework: dlsdk
+      adapter:
+        type: mixed
+        adapters:
+          gender:
+            type: classification
+            output_blob: prob/gender
+          age: 
+            type: regression
+            output_blob: fc/age_mean/BiasAdd/Add
+          facial_landmark:
+            type: landmarks_regression
+            output_blob: fc/fld/BiasAdd/Add
+    datasets:
+    - name: morph
+      data_source: MORPH/MORPH_Album2_2013A_Commercial
+      reader: opencv_imread
+      annotation_conversion:
+        converter: morph
+        annotation_dir: MORPH/MORPH_Album2_2013A_Commercial/vaticxx
+        image_dir: MORPH/MORPH_Album2_2013A_Commercial
+      preprocessing:
+      - type: crop_rect
+      - type: resize
+        interpolation: Linear
+        dst_width: 192
+        dst_height: 192
+      metrics:
+      - name: accuracy@gender
+        type: accuracy
+        annotation_source: gender
+        prediction_source: gender
+      - name: mae@age
+        type: mae
+        annotation_source: age
+        prediction_source: age
+      - name: facial_landmark_nme
+        type: normed_error
+        annotation_source: facial_landmark
+        prediction_source: facial_landmark
+

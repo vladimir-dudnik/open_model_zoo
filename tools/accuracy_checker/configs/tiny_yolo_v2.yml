@@ -51,7 +51,7 @@ models:
             classes: 80
 
     datasets:
-      - name: ms_coco_detection_80_class_without_backgound
+      - name: ms_coco_detection_80_class_without_background
 
         preprocessing:
           #- type: normalization

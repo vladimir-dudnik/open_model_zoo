@@ -14,6 +14,8 @@ models:
       - type: warp_affine
         src_landmarks: [[104, 113], [146, 113]]
         dst_landmarks: [[92, 111], [164, 111]]
+        dst_height: 256
+        dst_width: 256
       - type: resize
         interpolation: Linear
         dst_height: 120
@@ -25,4 +27,3 @@ models:
       - type: face_recognition_tafa_pair_metric
         threshold: 0.60
         presenter: print_scalar
-

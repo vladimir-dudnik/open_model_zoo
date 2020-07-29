@@ -1,0 +1,20 @@
+models:
+  - name: vas-person-reidentification
+    launchers:
+    - framework: dlsdk
+      adapter: reid
+    datasets:
+    - name: market-1501
+      data_source: Market1501-person-reidentification/Market-1501-v15.09.15
+      reader: opencv_imread
+      annotation_conversion:
+        converter: market1501_reid
+        data_dir: Market1501-person-reidentification/Market-1501-v15.09.15
+      preprocessing:
+      - type: resize
+        interpolation: LINEAR
+        dst_width: 128
+        dst_height: 256
+      metrics:
+      - type: normalized_embedding_accuracy
+        top_k: 2

@@ -33,4 +33,3 @@ models:
           overlap: 0.4
           relative_size: 0.25
           presenter: print_scalar
-

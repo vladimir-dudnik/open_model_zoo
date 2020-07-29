@@ -26,4 +26,3 @@ models:
         overlap_threshold: 0.5
         include_boundaries: false
         overlap_method: iou
-

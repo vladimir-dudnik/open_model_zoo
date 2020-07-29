@@ -41,4 +41,3 @@ models:
         type: normed_error
         annotation_source: facial_landmark
         prediction_source: facial_landmark
-

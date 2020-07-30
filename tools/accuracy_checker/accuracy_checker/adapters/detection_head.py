@@ -153,3 +153,4 @@ class HeadDetectionAdapter(Adapter):
             )
 
         return result
+

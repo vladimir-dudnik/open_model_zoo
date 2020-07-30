@@ -228,7 +228,6 @@ class NormalizeAudio(Preprocessor):
 
         return image
 
-
 class HanningWindow(Preprocessor):
     __provider__ = 'hanning_window'
 
@@ -253,7 +252,6 @@ class HanningWindow(Preprocessor):
         image.data = image.data * self.window
 
         return image
-
 
 class AudioSpectrogram(Preprocessor):
     __provider__ = 'audio_spectrogram'
@@ -298,6 +296,7 @@ class TriangleFiltering(Preprocessor):
     def parameters(cls):
         parameters = super().parameters()
         parameters.update({
+<<<<<<< a32456b8693acf3a5dfa2d1c2d87051155cacde9
             "base": NumberField(
                 default=16000, description='Spectrogram length expected by filter bank', value_type=int
             ),
@@ -450,7 +449,6 @@ class DCT(Preprocessor):
             output_dct[i] = _sum
 
         return output_dct
-
 
 class ClipCepstrum(Preprocessor):
     __provider__ = 'clip_cepstrum'
@@ -879,3 +877,4 @@ class AudioToMelSpectrogram(Preprocessor):
             x_std += 1e-5
             return x - np.reshape(x_mean, (-1, 1, 1)) / np.reshape(x_std, (-1, 1, 1))
         return x
+

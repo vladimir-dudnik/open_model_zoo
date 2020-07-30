@@ -1,0 +1,32 @@
+# model-zoo-models-private
+models:
+  - name: rfcn-resnet50
+    launchers:
+      - framework: dlsdk
+        inputs:
+          - name: im_info
+            type: IMAGE_INFO
+        outputs:
+          - proposal
+        adapter:
+          type: rfcn_class_agnostic
+          cls_out: cls_prob_reshape
+          bbox_out: bbox_pred_reshape
+          rois_out: proposal
+    datasets:
+        - name: VOC2012
+          preprocessing:
+            - type: resize
+              aspect_ratio_scale: fit_to_window
+              dst_height: 600
+              dst_width: 1024
+            - type: padding
+              dst_height: 600
+              dst_width: 1024
+              pad_type: right_bottom
+
+          postprocessing:
+            - type: clip_boxes
+              apply_to: prediction
+
+global_definitions: ../dataset_definitions.yml

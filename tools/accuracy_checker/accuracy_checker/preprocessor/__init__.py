@@ -1,10 +1,6 @@
 """
-<<<<<<< 0eed3e8eb790d44c33e4e4a689d21cf5c7bf28f9
 Copyright (c) 2018-2020 Intel Corporation
 
-=======
-Copyright (c) 2019 Intel Corporation
->>>>>>> pvd2
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -53,7 +49,6 @@ from .geometric_transformations import (
 )
 from .crop import (
     Crop, CropRect, ExtendAroundRect, Crop3D, TransformedCropWithAutoScale, CandidateCrop, CropOrPad, CropWithPadSize
-    CandidateCrop
 )
 from .resize import Resize, AutoResize
 from .nlp_preprocessors import DecodeByVocabulary, PadWithEOS

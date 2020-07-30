@@ -1,0 +1,37 @@
+models:
+  - name: vas-head-detection
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: head_detection
+          score_threshold: 0.6
+          layer_names: ["b8", "b12", "b16", "b24", "b32", "b48", "b64", "b96", "b128", "b192"]
+          anchor_sizes: [3, 2, 3, 2, 3, 2, 3, 2, 3, 2]
+          window_scales: [8, 8, 16, 16, 32, 32, 64, 64, 128, 128]
+          window_lengths: [8, 12, 16, 24, 32, 48, 64, 96, 128, 19]
+        allow_reshape_input: true
+    datasets:
+      - name: ava_head
+        data_source: AVA_HEAD
+        reader: opencv_imread
+        annotation_conversion:
+            converter: ava_head
+            data_dir: AVA_HEAD
+            annotation_file: AVA_HEAD/annotations.json
+        preprocessing:
+          - type: resize
+            dst_width: 320
+            dst_height: 240
+            interpolation: LINEAR
+          - type: padding
+            dst_width: 384
+            dst_height: 256
+            pad_type: right_bottom
+            pad_value: 104,116,123
+        postprocessing:
+          - type: nms
+            include_boundaries: false
+            use_min_area: true
+            overlap: 0.4
+        metrics:
+          - type: youtube_faces_accuracy

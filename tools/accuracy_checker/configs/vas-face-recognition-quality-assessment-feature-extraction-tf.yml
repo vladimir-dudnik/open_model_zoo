@@ -1,0 +1,31 @@
+models:
+  - name: vas-face-recognition-quality-assessment-feature-extraction
+    launchers:
+    - framework: dlsdk
+      adapter: face_recognition_quality_assessment
+    datasets:
+    - name: lfw-deepfunneled
+      data_source: LFW/lfw-deepfunneled
+      reader: opencv_imread
+      annotation_conversion:
+        converter: face_recognition_quality_assessment_converter
+        vasfr_pickle_dir: vas_pickle/fr_lfw_quality_score.pickle
+        images_dir: LFW/lfw-deepfunneled
+      preprocessing:
+      - type: warp_affine
+        src_landmarks: [[104, 113], [146, 113]]
+        dst_landmarks: [[92, 110.9], [164, 110.9]]
+        dst_height: 256
+        dst_width: 256
+      - type: resize
+        interpolation: Linear
+        dst_height: 60
+        dst_width: 60
+      - type: crop
+        dst_height: 56
+        dst_width: 56
+      metrics:
+      - type: score_class_comparison
+        num_high_quality: 4000
+        num_low_quality: 4000
+        presenter: print_scalar

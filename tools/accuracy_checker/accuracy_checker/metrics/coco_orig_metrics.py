@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -189,6 +189,8 @@ class MSCOCOorigBaseMetric(FullDatasetEvaluationMetric):
             cur_name = Path(pred.identifier).name
             assert cur_name in map_coco_img_file_name_to_img_id
             cur_img_id = map_coco_img_file_name_to_img_id[cur_name]
+            if pred.size == 0:
+                continue
 
             labels = pred.labels.tolist()
             scores = pred.scores.tolist()

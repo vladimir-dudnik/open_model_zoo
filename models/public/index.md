@@ -34,7 +34,7 @@ The models can be downloaded via Model Downloader
 | MobileNet V1 0.5 160        | Caffe\*                            | [mobilenet-v1-0.50-160](./mobilenet-v1-0.50-160/mobilenet-v1-0.50-160.md) | 59.86%/82.04% | 0.156 | 1.327 |
 | MobileNet V1 0.5 224        | Caffe\*                            | [mobilenet-v1-0.50-224](./mobilenet-v1-0.50-224/mobilenet-v1-0.50-224.md) | 63.042%/84.934%| 0.304 | 1.327 |
 | MobileNet V1 1.0 224        | Caffe\*<br>TensorFlow\*            | [mobilenet-v1-1.0-224](./mobilenet-v1-1.0-224/mobilenet-v1-1.0-224.md)<br>[mobilenet-v1-1.0-224-tf](./mobilenet-v1-1.0-224-tf/mobilenet-v1-1.0-224-tf.md)| 69.496%/89.224%<br>71.03%/89.94% | 1.148 | 4.221 |
-| MobileNet V2 1.0 224        | Caffe\*<br>TensorFlow\*<br>PyTorch\*| [mobilenet-v2](./mobilenet-v2/mobilenet-v2.md) <br>[mobilenet-v2-1.0-224](./mobilenet-v2-1.0-224/mobilenet-v2-1.0-224.md)<br>[mobilenet-v2-pytorch](./mobilenet-v2-pytorch/mobilenet-v2-pytorch.md) | 71.218%/90.178%<br>70.20%/89.61%<br>71.81%/90.396% | 0.615~0.876 | 3.489 |
+| MobileNet V2 1.0 224        | Caffe\*<br>TensorFlow\*<br>PyTorch\*| [mobilenet-v2](./mobilenet-v2/mobilenet-v2.md) <br>[mobilenet-v2-1.0-224](./mobilenet-v2-1.0-224/mobilenet-v2-1.0-224.md)<br>[mobilenet-v2-pytorch](./mobilenet-v2-pytorch/mobilenet-v2-pytorch.md) | 71.218%/90.178%<br>71.85%/90.69%<br>71.81%/90.396% | 0.615~0.876 | 3.489 |
 | MobileNet V2 1.4 224        | TensorFlow\*                       | [mobilenet-v2-1.4-224](./mobilenet-v2-1.4-224/mobilenet-v2-1.4-224.md) | 74.09%/91.97% | 1.183  | 6.087 |
 | MobileNet V3 Small 1.0      | TensorFlow\*                       | [mobilenet-v3-small-1.0-224-tf](./mobilenet-v3-small-1.0-224-tf/mobilenet-v3-small-1.0-224-tf.md) | 67.36%/87.45% | 0.121 | 2.537 |
 | MobileNet V3 Large 1.0      | TensorFlow\*                       | [mobilenet-v3-large-1.0-224-tf](./mobilenet-v3-large-1.0-224-tf/mobilenet-v3-large-1.0-224-tf.md) | 75.70%/92.76% | 0.4536 | 5.4721 |
@@ -106,7 +106,7 @@ SSD-based and provide reasonable accuracy/performance trade-offs.
 
 | Model Name                           | Implementation           | OMZ Model Name | Accuracy | GFlops | mParams |
 | ------------------------------------ | ------------------------ | -------------- | -------- | ------ | ------- |
-| CTPN                                 | TensorFlow\*             | [ctpn](./ctpn/ctpn.md) | 1.0864% | 55.813 | 17.237 | |
+| CTPN                                 | TensorFlow\*             | [ctpn](./ctpn/ctpn.md) | 73.67% | 55.813 | 17.237 |
 | CenterNet (CTDET with DLAV0) 384x384 | ONNX\*                   | [ctdet_coco_dlav0_384](./ctdet_coco_dlav0_384/ctdet_coco_dlav0_384.md)| 41.6105%| 34.994 | 17.911 |
 | CenterNet (CTDET with DLAV0) 512x512 | ONNX\*                   | [ctdet_coco_dlav0_512](./ctdet_coco_dlav0_512/ctdet_coco_dlav0_512.md)| 44.2756%| 62.211 | 17.911 |
 | FaceBoxes                            | PyTorch\*                | [faceboxes-pytorch](./faceboxes-pytorch/faceboxes-pytorch.md)|83.565% | 1.8975 | 1.0059 |
@@ -203,6 +203,14 @@ Colorization task is to predict colors of scene from grayscale image.
 | ------------------------- | ---------------| -------------- | -------- | ------ | ------- |
 | colorization-v2           | Caffe*         | [colorization-v2](./colorization-v2/colorization-v2.md) | | 64.0047 |  32.2354 |
 | colorization-v2-norebal   | Caffe*         | [colorization-v2-norebal](./colorization-v2-norebal/colorization-v2-norebal.md) | | 64.0047 |  32.2354 |
+
+## Sound Classification
+
+The task of sound classification is to predict what sounds are in an audio fragment.
+
+| Model Name                | Implementation | OMZ Model Name | GFlops | mParams |
+| ------------------------- | ---------------| -------------- | ------ | ------- |
+| ACLNet                    | [PyTorch\*](./aclnet/aclnet.md) | aclnet | 1.4     | 2.7     |
 
 ## Legal Information
 

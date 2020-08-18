@@ -47,6 +47,7 @@ network to detect objects of the same type better.
 | [vehicle-detection-adas-binary-0001](./vehicle-detection-adas-binary-0001/description/vehicle-detection-adas-binary-0001.md)                                                        | 0.942                | 1.079      |       |         | X        |       |                |         |
 | [person-vehicle-bike-detection-crossroad-0078](./person-vehicle-bike-detection-crossroad-0078/description/person-vehicle-bike-detection-crossroad-0078.md)                          | 3.964                | 1.178      |       | X       | X        | X     |                |         |
 | [person-vehicle-bike-detection-crossroad-1016](./person-vehicle-bike-detection-crossroad-1016/description/person-vehicle-bike-detection-crossroad-1016.md)                          | 3.560                | 2.887      |       | X       | X        | X     |                |         |
+| [person-vehicle-bike-detection-crossroad-yolov3-1020](./person-vehicle-bike-detection-crossroad-yolov3-1020/description/person-vehicle-bike-detection-crossroad-yolov3-1020.md)     | 65.984               | 61.922     |       | X       | X        | X     |                |         |
 | [vehicle-license-plate-detection-barrier-0106](./vehicle-license-plate-detection-barrier-0106/description/vehicle-license-plate-detection-barrier-0106.md)                          | 0.349                | 0.634      |       |         | X        |       | X              |         |
 | [product-detection-0001](./product-detection-0001/description/product-detection-0001.md)                                                                                            | 3.598                | 3.212      |       |         |          |       |                | X       |
 | [person-detection-asl-0001](./person-detection-asl-0001/description/person-detection-asl-0001.md)                                                                                   | 0.986                | 1.338      |       |      X  |          |       |                |         |
@@ -102,6 +103,10 @@ and accuracy (expect a bigger model to perform better).
 | [person-reidentification-retail-0267](./person-reidentification-retail-0267/description/person-reidentification-retail-0267.md)   | 0.564                | 0.595      | 92.7%             |
 | [person-reidentification-retail-0270](./person-reidentification-retail-0270/description/person-reidentification-retail-0270.md)   | 1.170                | 1.234      | 94.7%             |
 | [person-reidentification-retail-0265](./person-reidentification-retail-0265/description/person-reidentification-retail-0265.md)   | 1.993                | 2.103      | 95.9%             |
+| [person-reidentification-retail-0288](./person-reidentification-retail-0288/description/person-reidentification-retail-0288.md)   | 0.174                | 0.183      | 86.1%             |
+| [person-reidentification-retail-0287](./person-reidentification-retail-0287/description/person-reidentification-retail-0287.md)   | 0.564                | 0.595      | 92.9%             |
+| [person-reidentification-retail-0286](./person-reidentification-retail-0286/description/person-reidentification-retail-0286.md)   | 1.170                | 1.234      | 94.8%             |
+| [person-reidentification-retail-0277](./person-reidentification-retail-0277/description/person-reidentification-retail-0277.md)   | 1.993                | 2.103      | 96.2%             |
 
 ## Semantic Segmentation Models
 
@@ -169,6 +174,7 @@ Deep Learning models for text detection in various applications.
 |------------------------------------------------------------------------------------------------------------------------------------------------|--------------------- |----------- |
 | [text-detection-0003](./text-detection-0003/description/text-detection-0003.md)                                                                | 51.256               | 6.747      |
 | [text-detection-0004](./text-detection-0004/description/text-detection-0004.md)                                                                | 23.305               | 4.328      |
+| [horizontal-text-detection-0001](./horizontal-text-detection-0001/description/horizontal-text-detection-0001.md)                               | 7.718              | 2.259     |
 
 ## Text Recognition
 

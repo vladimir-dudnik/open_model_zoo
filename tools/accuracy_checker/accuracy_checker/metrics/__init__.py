@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019-2020 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,13 @@ from .classification import (
     ClassificationF1Score,
     MetthewsCorrelation
 )
-from .detection import (DetectionMAP, MissRate, Recall, DetectionAccuracyMetric, YoutubeFacesAccuracy)
+from .detection import (
+    DetectionMAP,
+    MissRate,
+    Recall,
+    DetectionAccuracyMetric,
+    YoutubeFacesAccuracy
+)
 from .reid import (
     CMCScore,
     ReidMAP,
@@ -84,6 +90,8 @@ from .attribute_classification import (
     AttributeClassificationAccuracy
 )
 
+from .speech_recognition import SpeechRecognitionWER, GreedyWER
+from .score_class_comparison import ScoreClassComparisonMetric
 __all__ = [
     'Metric',
     'MetricsExecutor',
@@ -163,5 +171,10 @@ __all__ = [
 
     'AttributeClassificationRecall',
     'AttributeClassificationPrecision',
-    'AttributeClassificationAccuracy'
+    'AttributeClassificationAccuracy',
+
+    'SpeechRecognitionWER',
+    'GreedyWER',
+
+    'ScoreClassComparisonMetric',
 ]

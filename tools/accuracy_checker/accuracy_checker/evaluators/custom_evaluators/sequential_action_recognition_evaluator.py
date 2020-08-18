@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019-2020 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ class SequentialActionRecognitionEvaluator(BaseEvaluator):
     def from_configs(cls, config, delayed_model_loading=False):
         dataset_config = config['datasets']
         launcher_config = config['launchers'][0]
-        if launcher_config['framework'] == 'dlsdk' and 'devise' not in launcher_config:
+        if launcher_config['framework'] == 'dlsdk' and 'device' not in launcher_config:
             launcher_config['device'] = 'CPU'
 
         launcher = create_launcher(launcher_config, delayed_model_loading=True)

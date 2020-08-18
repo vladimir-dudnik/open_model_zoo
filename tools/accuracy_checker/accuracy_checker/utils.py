@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -490,6 +490,9 @@ def get_parameter_value_from_config(config, parameters, key):
     field = parameters[key]
     value = config.get(key, field.default)
     field.validate(value)
+    data_type = field.type
+    if value is not None and data_type is not None:
+        value = data_type(value)
     return value
 
 

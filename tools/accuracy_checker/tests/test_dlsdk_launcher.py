@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -90,7 +90,19 @@ def get_dlsdk_test_blob(models_dir, config_update=None):
         'model': str(models_dir / 'SampLeNet.blob'),
         'device': 'MYRIAD',
         'adapter': 'classification',
-        '_models_prefix': str(models_dir)
+    }
+    if config_update:
+        config.update(config_update)
+
+    return create_launcher(config)
+
+
+def get_onnx_test_model(model_dir, config_update=None):
+    config = {
+        'framework': 'dlsdk',
+        'model': str(model_dir / 'samplenet.onnx'),
+        'device': 'CPU',
+        'adapter': 'classification'
     }
     if config_update:
         config.update(config_update)
@@ -149,6 +161,14 @@ class TestDLSDKLauncherInfer:
         dlsdk_test_model = get_dlsdk_test_model(models_dir, config_update)
         assert dlsdk_test_model._model == models_dir / 'SampLeNet.xml'
         assert dlsdk_test_model._weights == models_dir / 'SampLeNet.bin'
+
+    def test_dlsdk_onnx_import(self, data_dir, models_dir):
+        dlsdk_test_model = get_onnx_test_model(models_dir)
+        image = get_image(data_dir / '1.jpg', dlsdk_test_model.inputs['data'].shape)
+        input_blob = np.transpose([image.data], (0, 3, 1, 2))
+        dlsdk_test_model.predict([{'data': input_blob.astype(np.float32)}], [image.metadata])
+        assert dlsdk_test_model.output_blob == 'fc3'
+
 
 
 class TestDLSDKLauncherAffinity:
@@ -505,7 +525,6 @@ class TestDLSDKLauncher:
             'framework': 'dlsdk',
             'tf_meta': '/path/to/source_models/custom_model',
             'device': 'cpu',
-            '_models_prefix': '/path/to/source_models',
             'adapter': 'classification',
             'should_log_cmd': False
         }
@@ -522,7 +541,6 @@ class TestDLSDKLauncher:
             'framework': 'dlsdk',
             'tf_model': '/path/to/source_models/custom_model',
             'device': 'cpu',
-            '_models_prefix': '/path/to',
             'adapter': 'classification',
             'mo_params': {'tensorflow_use_custom_operations_config': 'ssd_v2_support.json'},
             '_tf_custom_op_config_dir': 'config/dir'
@@ -550,7 +568,6 @@ class TestDLSDKLauncher:
             'framework': 'dlsdk',
             'tf_model': '/path/to/source_models/custom_model',
             'device': 'cpu',
-            '_models_prefix': '/path/to',
             'adapter': 'classification',
             'mo_params': {'tensorflow_use_custom_operations_config': 'config.json'}
         }
@@ -576,7 +593,6 @@ class TestDLSDKLauncher:
             'framework': 'dlsdk',
             'tf_model': '/path/to/source_models/custom_model',
             'device': 'cpu',
-            '_models_prefix': '/path/to',
             'adapter': 'classification',
             'mo_params': {'tensorflow_object_detection_api_pipeline_config': 'operations.config'},
             '_tf_obj_detection_api_pipeline_config_path': None
@@ -1166,8 +1182,7 @@ class TestDLSDKLauncherConfig:
 
     def test_dlsdk_launcher(self):
         launcher = {
-            'framework': 'dlsdk', 'model': 'custom', 'weights': 'custom', 'adapter': 'ssd', 'device': 'cpu',
-            '_models_prefix': 'models'
+            'framework': 'dlsdk', 'model': 'custom', 'weights': 'custom', 'adapter': 'ssd', 'device': 'cpu'
         }
         create_launcher(launcher)
 

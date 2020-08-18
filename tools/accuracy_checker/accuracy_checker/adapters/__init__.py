@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019-2020 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ from .detection_person_vehicle import (
     PersonVehicleDetectionAdapter,
     PersonVehicleDetectionRefinementAdapter
 )
+from .detection_head import HeadDetectionAdapter
 from .ssd import SSDAdapter, PyTorchSSDDecoder, FacePersonAdapter, SSDAdapterMxNet, SSDONNXAdapter
 from .retinaface import RetinaFaceAdapter
 from .yolo import TinyYOLOv1Adapter, YoloV2Adapter, YoloV3Adapter
@@ -64,12 +65,11 @@ from .segmentation import SegmentationAdapter, BrainTumorSegmentationAdapter
 from .pose_estimation import HumanPoseAdapter
 from .pose_estimation_3d import HumanPose3dAdapter
 
-from .dummy_adapters import XML2DetectionAdapter
-
 from .hit_ratio import HitRatioAdapter
 
 from .mask_rcnn import MaskRCNNAdapter
 from .mask_rcnn_with_text import MaskRCNNWithTextAdapter
+from .yolact import YolactAdapter
 
 from .nlp import MachineTranslationAdapter, QuestionAnsweringAdapter
 
@@ -81,9 +81,12 @@ from .image_inpainting import ImageInpaintingAdapter
 from .style_transfer import StyleTransferAdapter
 
 from .attribute_classification import AttributeClassificationAdapter
+from .audio_recognition import CTCBeamSearchDecoder, CTCGreedyDecoder
 
 from .regression import RegressionAdapter
 from .mixed_adapter import MixedAdapter
+from .face_recognition_quality_assessment import QualityAssessmentAdapter
+from .dummy_adapters import GVADetectionAdapter, XML2DetectionAdapter, GVAClassificationAdapter
 
 __all__ = [
     'Adapter',
@@ -105,6 +108,7 @@ __all__ = [
     'FaceDetectionRefinementAdapter',
     'PersonVehicleDetectionAdapter',
     'PersonVehicleDetectionRefinementAdapter',
+    'HeadDetectionAdapter',
 
     'SegmentationAdapter',
     'BrainTumorSegmentationAdapter',
@@ -141,6 +145,7 @@ __all__ = [
 
     'MaskRCNNAdapter',
     'MaskRCNNWithTextAdapter',
+    'YolactAdapter',
 
     'MachineTranslationAdapter',
     'QuestionAnsweringAdapter',
@@ -153,5 +158,14 @@ __all__ = [
     'AttributeClassificationAdapter',
 
     'RegressionAdapter',
-    'MixedAdapter'
+    'MixedAdapter',
+
+    'CTCBeamSearchDecoder',
+    'CTCGreedyDecoder',
+
+    'QualityAssessmentAdapter',
+
+    'GVADetectionAdapter',
+    'GVAClassificationAdapter',
+
 ]

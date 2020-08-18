@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -200,5 +200,8 @@ def analyze_dataset(annotations, metadata):
     analyzer = BaseDataAnalyzer.provide(first_element.__class__.__name__)
     inside_meta = copy.copy(metadata)
     data_analysis = analyzer.analyze(annotations, inside_meta)
-    metadata['data_analysis'] = data_analysis
+    if metadata:
+        metadata['data_analysis'] = data_analysis
+    else:
+        metadata = {'data_analysis': data_analysis}
     return metadata

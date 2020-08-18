@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -145,6 +145,7 @@ class DLSDKLauncher(Launcher):
         self.disable_resize_to_input = False
         self._do_reshape = False
         self._use_set_blob = False
+        self._output_layouts = dict()
 
         if not delayed_model_loading:
             if dlsdk_launcher_config.need_conversion:
@@ -231,6 +232,8 @@ class DLSDKLauncher(Launcher):
         if metadata is not None:
             for meta_ in metadata:
                 meta_['input_shape'] = self.inputs_info_for_meta()
+                if self._output_layouts:
+                    meta_['output_layout'] = self._output_layouts
         self._do_reshape = False
         self._use_set_blob = self.disable_resize_to_input
 
@@ -252,6 +255,8 @@ class DLSDKLauncher(Launcher):
         if metadata is not None:
             for meta_ in metadata:
                 meta_['input_shape'] = self.inputs_info_for_meta()
+                if self._output_layouts:
+                    meta_['output_layout'] = self._output_layouts
 
         self._do_reshape = False
 
@@ -262,6 +267,9 @@ class DLSDKLauncher(Launcher):
         if metadata is not None:
             for meta_ in metadata:
                 meta_['input_shape'] = self.inputs_info_for_meta()
+                if self._output_layouts:
+                    meta_['output_layout'] = self._output_layouts
+
         ir.infer(infer_inputs, metadata, context)
 
     def _is_hetero(self):
@@ -288,7 +296,9 @@ class DLSDKLauncher(Launcher):
                 raise ConfigError('Layer \'{layer}\' is not present in network'.format(layer=layer))
         layers = self.network.layers
         for layer_name in layers:
-            device = custom_affinity.get(layer_name, automatic_affinity[layer_name])
+            device = custom_affinity.get(layer_name, automatic_affinity.get(layer_name))
+            if device is None:
+                continue
             if device not in self._devices_list():
                 raise ConfigError(
                     'Device \'{device}\' set for \'{layer}\' layer is not present in '
@@ -311,6 +321,12 @@ class DLSDKLauncher(Launcher):
                 blobs_list = list(Path(model_dir).glob('*.blob'))
             return blobs_list
 
+        def get_onnx(model_dir):
+            onnx_list = list(Path(model_dir).glob('{}.onnx'.format(self._model_name)))
+            if not onnx_list:
+                onnx_list = list(Path(model_dir).glob('*.onnx'))
+            return onnx_list
+
         def get_model():
             model = Path(self.get_value_from_config('model'))
             model_is_blob = self.get_value_from_config('_model_is_blob')
@@ -324,6 +340,8 @@ class DLSDKLauncher(Launcher):
                 model_list = get_xml(model)
                 if not model_list and model_is_blob is None:
                     model_list = get_blob(model)
+                if not model_list:
+                    model_list = get_onnx(model)
             if not model_list:
                 raise ConfigError('suitable model is not found')
             if len(model_list) != 1:
@@ -336,7 +354,7 @@ class DLSDKLauncher(Launcher):
         if is_blob:
             return model, None
         weights = self.get_value_from_config('weights')
-        if weights is None or Path(weights).is_dir():
+        if weights is None or Path(weights).is_dir() and model.suffix != '.onnx':
             weights_dir = weights or model.parent
             weights = Path(weights_dir) / model.name.replace('xml', 'bin')
             print_info('Found weights {}'.format(get_path(weights)))
@@ -714,7 +732,7 @@ class DLSDKLauncher(Launcher):
             batch_pos = input_info.layout.find('N')
             self._batch = input_info.shape[batch_pos] if batch_pos != -1 else 1
             return
-        if self._weights is None:
+        if self._weights is None and self._model.suffix != '.onnx':
             self._weights = model_path.parent / (model_path.name.split(model_path.suffix)[0] + '.bin')
         self.network = self.read_network(self._model, self._weights)
         self.original_outputs = self.network.outputs
@@ -874,6 +892,7 @@ class DLSDKLauncher(Launcher):
             print_info('\tLayer name: {}'.format(name))
             print_info('\tprecision: {}'.format(output_info.precision))
             print_info('\tshape: {}\n'.format(output_info.shape))
+            self._output_layouts[name] = output_info.layout
 
     def _set_preprocess(self, preprocess):
         if preprocess.ie_processor is None:

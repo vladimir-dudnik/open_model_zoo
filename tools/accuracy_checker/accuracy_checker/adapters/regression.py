@@ -1,5 +1,5 @@
 """
-Copyright (c) 2020 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@ limitations under the License.
 import numpy as np
 
 from .adapter import Adapter
+from ..config import BoolField
 from ..representation import RegressionPrediction
+
 
 class RegressionAdapter(Adapter):
     """
@@ -27,7 +29,16 @@ class RegressionAdapter(Adapter):
     __provider__ = 'regression'
     prediction_types = (RegressionPrediction, )
 
-    def process(self, raw, identifiers=None, frame_meta=None):
+    @classmethod
+    def parameters(cls):
+        params = super().parameters()
+        params.update({'keep_shape': BoolField(optional=True, default=False)})
+        return params
+
+    def configure(self):
+        self.keep_shape = self.get_value_from_config('keep_shape')
+
+    def process(self, raw, identifiers, frame_meta):
         """
         Args:
             identifiers: list of input data identifiers
@@ -37,9 +48,10 @@ class RegressionAdapter(Adapter):
             list of RegressionPrediction objects
         """
         predictions = self._extract_predictions(raw, frame_meta)[self.output_blob]
-        if len(np.shape(predictions)) == 1:
+        if len(np.shape(predictions)) == 1 or (self.keep_shape and np.shape(predictions)[0] != len(identifiers)):
             predictions = np.expand_dims(predictions, axis=0)
-        predictions = np.reshape(predictions, (predictions.shape[0], -1))
+        if not self.keep_shape:
+            predictions = np.reshape(predictions, (predictions.shape[0], -1))
 
         result = []
         for identifier, output in zip(identifiers, predictions):

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019-2020 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -74,6 +74,10 @@ from .image_processing import ImageProcessingConverter
 from .aflw2000_3d import AFLW20003DConverter
 from .ade20k_dataset_converter import ADE20kConverter
 
+from .librispeech import LibrispeechConverter
+from .criteo_kaggle_dac import CriteoKaggleDACConverter
+from .features_regression import FeaturesRegressionConverter
+
 __all__ = [
     'BaseFormatConverter',
     'make_subset',
@@ -136,5 +140,10 @@ __all__ = [
     'Wikitext2RawConverter',
     'ImageProcessingConverter',
     'AFLW20003DConverter',
-    'ADE20kConverter'
+
+    'ADE20kConverter',
+
+    'LibrispeechConverter',
+    'CriteoKaggleDACConverter',
+    'FeaturesRegressionConverter'
 ]

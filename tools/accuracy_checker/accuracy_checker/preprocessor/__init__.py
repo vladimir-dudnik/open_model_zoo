@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ limitations under the License.
 
 from .preprocessing_executor import PreprocessingExecutor
 from .preprocessor import Preprocessor
-from .audio_preprocessing import ResampleAudio, ClipAudio, NormalizeAudio
 from .color_space_conversion import (
     BgrToRgb, RgbToBgr,
     BgrToGray, RgbToGray,
@@ -26,21 +25,32 @@ from .color_space_conversion import (
     BGRtoNV12Converter, RGBtoNV12Converter,
     NV12toBGRConverter, NV12toRGBConverter
 )
+from .audio_preprocessing import (
+    ResampleAudio,
+    ClipAudio,
+    NormalizeAudio,
+    HanningWindow,
+    AudioSpectrogram,
+    TriangleFiltering,
+    DCT,
+    ClipCepstrum,
+    TrimmingAudio,
+    SamplesToFloat32,
+    AudioToMelSpectrogram
+)
+
 from .normalization import Normalize, Normalize3d
 from .geometric_transformations import (
     GeometricOperationMetadata,
     Flip,
-    Crop,
-    CropRect,
-    ExtendAroundRect,
     PointAligner,
     Tiling,
-    Crop3D,
-    TransformedCropWithAutoScale,
     ImagePyramid,
     FaceDetectionImagePyramid,
-    WarpAffine,
-    CandidateCrop
+    WarpAffine
+)
+from .crop import (
+    Crop, CropRect, ExtendAroundRect, Crop3D, TransformedCropWithAutoScale, CandidateCrop, CropOrPad, CropWithPadSize
 )
 from .resize import Resize, AutoResize
 from .nlp_preprocessors import DecodeByVocabulary, PadWithEOS
@@ -57,24 +67,25 @@ __all__ = [
     'ResampleAudio',
     'ClipAudio',
     'NormalizeAudio',
+    'HanningWindow',
+    'AudioSpectrogram',
+    'TriangleFiltering',
+    'DCT',
+    'ClipCepstrum',
+    'TrimmingAudio',
+    'SamplesToFloat32',
+    'AudioToMelSpectrogram',
 
     'Resize',
     'Resize3D',
     'AutoResize',
     'Flip',
-    'Crop',
-    'CropRect',
-    'ExtendAroundRect',
     'PointAligner',
     'Tiling',
-    'Crop3D',
     'CropBraTS',
-    'TransformedCropWithAutoScale',
     'ImagePyramid',
     'FaceDetectionImagePyramid',
     'WarpAffine',
-    'CandidateCrop',
-
     'BgrToGray',
     'BgrToRgb',
     'RgbToGray',
@@ -82,6 +93,12 @@ __all__ = [
     'BGR2YUVConverter',
     'TfConvertImageDType',
     'SelectInputChannel',
+    'CropOrPad',
+    'CropWithPadSize',
+    'Crop',
+    'CandidateCrop',
+    'CropRect',
+    'Crop3D',
 
     'Normalize3d',
     'Normalize',

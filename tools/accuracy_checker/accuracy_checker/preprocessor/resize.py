@@ -1,3 +1,19 @@
+"""
+Copyright (c) 2018-2020 Intel Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+"""
+
 import cv2
 from PIL import Image
 import numpy as np
@@ -77,6 +93,11 @@ def east_keep_aspect_ratio(dst_width, dst_height, image_width, image_height):
     return resize_w, resize_h
 
 
+def min_ratio(dst_width, dst_height, image_width, image_height):
+    ratio = min(float(image_height) / float(dst_height), float(image_width) / float(dst_width))
+    return int(image_width / ratio), int(image_height / ratio)
+
+
 ASPECT_RATIO_SCALE = {
     'width': scale_width,
     'height': scale_height,
@@ -84,7 +105,8 @@ ASPECT_RATIO_SCALE = {
     'fit_to_window': scale_fit_to_window,
     'frcnn_keep_aspect_ratio': frcnn_keep_aspect_ratio,
     'ctpn_keep_aspect_ratio': ctpn_keep_aspect_ratio,
-    'east_keep_aspect_ratio': east_keep_aspect_ratio
+    'east_keep_aspect_ratio': east_keep_aspect_ratio,
+    'min_ratio': min_ratio
 }
 
 

@@ -19,6 +19,16 @@ datasets:
     dataset_meta: mscoco_mask_rcnn_short_80.json
     data_source: val2017
 
+  - name: ms_coco_mask_rcnn_short_80_classes_without_background
+    annotation_conversion:
+      converter: mscoco_mask_rcnn
+      annotation_file: instances_val2017.json
+      has_background: False
+      sort_annotations: True
+    annotation: mscoco_mask_rcnn_short_80_without_bkgr.pickle
+    dataset_meta: mscoco_mask_rcnn_short_80_without_bkgr.json
+    data_source: val2017
+
   - name: ms_coco_mask_rcnn_short_91_classes
     annotation_conversion:
       converter: mscoco_mask_rcnn
@@ -453,6 +463,13 @@ datasets:
       data_dir: ICDAR15_DET/gt
     annotation: icdar15_detection.pickle
 
+  - name: ICDAR2013_detection
+    data_source: ICDAR13_DET
+    annotation_conversion:
+      converter: icdar_detection
+      data_dir: ICDAR13_DET/gt
+    annotation: icdar13_detection.pickle
+
   - name: ICDAR2013
     data_source: ICDAR13_REC/Challenge2_Test_Task3_Images
     annotation_conversion:
@@ -460,6 +477,13 @@ datasets:
       annotation_file: ICDAR13_REC/gt/gt.txt.fixed.alfanumeric
     annotation: icdar13_recognition.pickle
     dataset_meta: icdar13_recognition.json
+
+  - name: ICDAR2013_detection
+    data_source: ICDAR13_DET
+    annotation_conversion:
+      converter: icdar_detection
+      data_dir: ICDAR13_DET/gt
+    annotation: icdar13_detection.pickle
 
   - name: market1501
     data_source: Market-1501-v15.09.15

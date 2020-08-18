@@ -1,5 +1,5 @@
 """
-Copyright (c) 2019 Intel Corporation
+Copyright (c) 2018-2020 Intel Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class PersonVehicleDetectionAdapter(Adapter):
     def configure(self):
         self.iou_threshold = self.get_value_from_config('iou_threshold')
 
-    def process(self, raw, identifiers=None, frame_meta=None):
+    def process(self, raw, identifiers, frame_meta):
         result = []
         if isinstance(raw, dict):
             bbox_pred = raw['bbox_pred']
@@ -59,8 +59,8 @@ class PersonVehicleDetectionAdapter(Adapter):
         return result
 
     def output_to_proposals(self, bbox_pred, proposals, cls_score, frame_meta):
-        img_width, img_height, _ = frame_meta['image_size']
-        input_width, input_height, _ = frame_meta['image_info']
+        img_height, img_width, _ = frame_meta['image_size']
+        input_height, input_width, _ = frame_meta['image_info']
 
         ww = img_width
         hh = img_height

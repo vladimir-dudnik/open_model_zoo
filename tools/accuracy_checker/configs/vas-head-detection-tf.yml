@@ -35,3 +35,7 @@ models:
             overlap: 0.4
         metrics:
           - type: youtube_faces_accuracy
+            name: head_detection_accuracy
+            overlap: 0.5
+            relative_size: 0.25
+            presenter: print_scalar

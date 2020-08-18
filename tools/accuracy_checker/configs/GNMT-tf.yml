@@ -1,0 +1,34 @@
+models:
+  - name: GNMT
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: nmt
+          vocabulary_file: GNMT/vocab.bpe.32000.de
+          eos_index: 2
+
+        inputs:
+          - name: IteratorGetNext/placeholder_out_port_1
+            type: CONST_INPUT
+            value: [50]
+
+    datasets:
+        - name: WMT
+          annotation: wmt_en_de.pickle
+
+          reader:
+            type: annotation_features_extractor
+            features:
+              - source
+
+          preprocessing:
+            - type: decode_by_vocabulary
+              vocabulary_file: GNMT/vocab.bpe.32000.en
+              unk_index: 0
+
+            - type: pad_with_eos
+              eos_index: 2
+              sequence_len: 50
+
+          metrics:
+            - type: bleu

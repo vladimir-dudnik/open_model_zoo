@@ -296,7 +296,6 @@ class TriangleFiltering(Preprocessor):
     def parameters(cls):
         parameters = super().parameters()
         parameters.update({
-<<<<<<< a32456b8693acf3a5dfa2d1c2d87051155cacde9
             "base": NumberField(
                 default=16000, description='Spectrogram length expected by filter bank', value_type=int
             ),

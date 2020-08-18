@@ -15,6 +15,3 @@ models:
         interpolation: LINEAR
         dst_width: 128
         dst_height: 256
-      metrics:
-      - type: normalized_embedding_accuracy
-        top_k: 2

@@ -7,11 +7,15 @@
 
 #include <string>
 #include <vector>
-#include <gflags/gflags.h>
 #include <iostream>
+#include <gflags/gflags.h>
+
+#include <samples/default_flags.hpp>
+
+DEFINE_INPUT_FLAGS
 
 static const char help_message[] = "Print a usage message.";
-static const char video_message[] = "Required. Path to a video file (specify \"cam\" to work with camera).";
+//static const char video_message[] = "Required. Path to a video file (specify \"cam\" to work with camera).";
 static const char model_message[] = "Required. Path to an .xml file with a trained model.";
 static const char target_device_message[] = "Optional. Specify the target device to infer on (the list of available devices is shown below). "
                                             "Default value is CPU. Use \"-d HETERO:<comma-separated_devices_list>\" format to specify HETERO plugin. "
@@ -30,12 +34,12 @@ static const char num_threads_message[] = "Optional. Number of threads.";
 static const char num_streams_message[] = "Optional. Number of streams to use for inference on the CPU or/and GPU in "
                                           "throughput mode (for HETERO and MULTI device cases use format "
                                           "<device1>:<nstreams1>,<device2>:<nstreams2> or just <nstreams>)";
-static const char loop_input_message[] = "Optional. Iterate over input infinitely.";
+//static const char loop_input_message[] = "Optional. Iterate over input infinitely.";
 static const char no_show_processed_video[] = "Optional. Do not show processed video.";
 static const char utilization_monitors_message[] = "Optional. List of monitors to show initially.";
 
 DEFINE_bool(h, false, help_message);
-DEFINE_string(i, "", video_message);
+//DEFINE_string(i, "", video_message);
 DEFINE_string(m, "", model_message);
 DEFINE_string(d, "CPU", target_device_message);
 DEFINE_string(labels, "", labels_message);
@@ -48,7 +52,7 @@ DEFINE_bool(auto_resize, false, input_resizable_message);
 DEFINE_uint32(nireq, 2, num_inf_req_message);
 DEFINE_uint32(nthreads, 0, num_threads_message);
 DEFINE_string(nstreams, "", num_streams_message);
-DEFINE_bool(loop_input, false, loop_input_message);
+//DEFINE_bool(loop_input, false, loop_input_message);
 DEFINE_bool(no_show, false, no_show_processed_video);
 DEFINE_string(u, "", utilization_monitors_message);
 
@@ -61,7 +65,7 @@ static void showUsage() {
     std::cout << "Options:" << std::endl;
     std::cout << std::endl;
     std::cout << "    -h                        " << help_message << std::endl;
-    std::cout << "    -i \"<path>\"               " << video_message << std::endl;
+    std::cout << "    -i \"<path>\"               " << /*video_message*/input_message << std::endl;
     std::cout << "    -m \"<path>\"               " << model_message << std::endl;
     std::cout << "      -l \"<absolute_path>\"    " << custom_cpu_library_message << std::endl;
     std::cout << "          Or" << std::endl;
@@ -75,7 +79,7 @@ static void showUsage() {
     std::cout << "    -nireq \"<integer>\"        " << num_inf_req_message << std::endl;
     std::cout << "    -nthreads \"<integer>\"     " << num_threads_message << std::endl;
     std::cout << "    -nstreams                 " << num_streams_message << std::endl;
-    std::cout << "    -loop_input               " << loop_input_message << std::endl;
+    std::cout << "    -loop                     " << /*loop_input_message*/loop_message << std::endl;
     std::cout << "    -no_show                  " << no_show_processed_video << std::endl;
     std::cout << "    -u                        " << utilization_monitors_message << std::endl;
 }

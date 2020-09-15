@@ -4,8 +4,8 @@ models:
       - framework: dlsdk
         adapter:
           type: retinanet
-          loc_out: Concat_317
-          class_out: Concat_473
+          loc_out: "692"
+          class_out: "888"
 
     datasets:
       - name: ms_coco_detection_80_class_without_backgound

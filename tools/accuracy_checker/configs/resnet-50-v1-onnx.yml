@@ -1,0 +1,13 @@
+models:
+  - name: resnet50-v1
+    launchers:
+      - framework: dlsdk
+        adapter: classification
+
+    datasets:
+      - name: imagenet_1000_classes
+        preprocessing:
+          - type: resize
+            size: 256
+          - type: crop
+            size: 224

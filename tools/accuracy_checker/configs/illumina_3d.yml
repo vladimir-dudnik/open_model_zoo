@@ -1,0 +1,19 @@
+  - name: illumina_3d
+    launchers:
+      - framework: dlsdk
+        adapter: segmentation
+        inputs:
+          - name: input_1_3
+            type: INPUT
+            layout: 'NCDHW'
+    datasets:
+      - name: illumina_dataset
+        annotation_conversion:
+          data_dir: illumina_dataset/converted_data
+          converter: illumina_dataset
+        data_source: illumina_dataset/converted_data
+        reader: numpy_reader
+        postprocessing:
+          - type: argmax_segmentation_mask
+        metrics:
+          - type: segmentation_accuracy

@@ -1,0 +1,12 @@
+models:
+  - name: dna_r9.4.1_2d
+    launchers:
+     - framework: dlsdk
+       adapter:
+         type: dna_seq_beam_search
+         beam_size: 5
+    datasets:
+      - name: dna_r9.4.1_val
+        metrics:
+          - type: dna_seq_accuracy
+            presenter: print_vector

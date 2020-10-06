@@ -1,5 +1,5 @@
 models: 
- - name: illumina_3d
+  - name: illumina_3d
     launchers:
       - framework: dlsdk
         adapter: segmentation

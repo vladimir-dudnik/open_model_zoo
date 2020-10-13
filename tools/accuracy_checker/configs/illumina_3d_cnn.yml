@@ -1,4 +1,4 @@
-  - name: illumina_3d
+  - name: illumina_3d_cnn
     launchers:
       - framework: dlsdk
         adapter: segmentation

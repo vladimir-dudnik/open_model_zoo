@@ -1,0 +1,31 @@
+models:
+  - name: ge-ultrasound
+    launchers:
+      - framework: dlsdk
+        adapter: segmentation_one_class
+        inputs:
+          - name: input_1
+            layout: NHWC
+            type: INPUT
+    datasets:
+      - name: ge ultrasound
+        data_source: ge_ultrasound
+        annotation_conversion:
+          converter: ge_ultrasound
+          annotation_file: ge_ultrasound/manifest_ultrasound.csv
+        reader:
+          type: opencv_imread
+          reading_flag: gray
+        postprocessing:
+          - type: encode_segmentation_mask
+            apply_to: annotation
+        metrics:
+          - type: segmentation_accuracy
+            use_argmax: false
+            presenter: print_vector
+          - type: frequency_weighted_accuracy
+            use_argmax: false
+            presenter: print_vector
+          - type: mean_iou
+            use_argmax: false
+            presenter: print_vector

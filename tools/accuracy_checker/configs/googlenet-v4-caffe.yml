@@ -1,0 +1,19 @@
+models:
+- name: googlenet-v4
+  launchers:
+  - framework: dlsdk
+    adapter: classification
+  datasets:
+  - name: imagenet_1000_classes
+    preprocessing:
+    - type: resize
+      size: 320
+    - type: crop
+      size: 299
+    metrics:
+    - name: accuracy@top1
+      type: accuracy
+      top_k: 1
+    - name: acciracy@top5
+      type: accuracy
+      top_k: 5

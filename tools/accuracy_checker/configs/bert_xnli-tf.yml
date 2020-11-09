@@ -18,7 +18,7 @@ models:
             value: segment_ids
 
     datasets:
-      - name: xnli1.0
+      - name: xnli
         reader:
           type: annotation_features_extractor
           features:

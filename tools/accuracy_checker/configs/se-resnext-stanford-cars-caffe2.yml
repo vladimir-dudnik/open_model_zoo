@@ -1,0 +1,19 @@
+models:
+  - name: se-resnext-stanford-cars
+    launchers:
+      - framework: dlsdk
+        adapter: classification
+    datasets:
+      - name: StanfordCars
+        preprocessing:
+          - type: crop
+            max_square: True
+          - type: resize
+            size: 224
+        metrics:
+          - name: accuracy@top1
+            type: accuracy
+            top_k: 1
+          - name: accuracy@top5
+            type: accuracy
+            top_k: 5

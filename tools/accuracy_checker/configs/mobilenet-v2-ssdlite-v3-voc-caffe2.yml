@@ -1,0 +1,20 @@
+models:
+  - name: mobilenet-v2-ssdlite-v3-voc
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: ssd_onnx
+          bboxes_out: detected_boxes
+          labels_out: detected_classes
+          scores_out: detected_scores
+    datasets:
+      - name: VOC2007_without_background
+        preprocessing:
+          - type: resize
+            size: 320
+
+        postprocessing:
+          - type: resize_prediction_boxes
+        metrics:
+        - type: map
+          presenter: print_scalar

@@ -1,0 +1,26 @@
+models:
+  - name: yolo-v2-voc
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: yolo_v2
+          anchors: "1.08, 1.19, 3.42, 4.41, 6.63, 11.38, 9.42, 5.11, 16.62, 10.52"
+          num: 5
+          coords: 4
+          classes: 20
+          cells: 16
+          raw_output: true
+
+    datasets:
+      - name: VOC2007_without_background
+
+        preprocessing:
+          - type: resize
+            size: 512
+
+        postprocessing:
+          - type: resize_prediction_boxes
+          - type: nms
+            overlap: 0.45
+        metrics:
+        - type: map

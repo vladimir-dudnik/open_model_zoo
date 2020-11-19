@@ -1,0 +1,19 @@
+models:
+  - name: two-stage-product-reco-b92
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: two_stage_detection
+          boxes_out: rpn_bbox
+          cls_out: cls_probs
+    datasets:
+      - name: B92Product
+
+        preprocessing:
+          - type: resize
+            size: 512
+
+        postprocessing:
+          - type: resize_prediction_boxes
+        metrics:
+        - type: map

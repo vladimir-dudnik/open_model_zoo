@@ -1,0 +1,26 @@
+models:
+  - name: tiny-yolo-v2-voc
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: yolo_v2
+          anchors: "0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828"
+          num: 5
+          coords: 4
+          classes: 20
+          cells: 16
+          raw_output: true
+
+    datasets:
+      - name: VOC2007_without_background
+
+        preprocessing:
+          - type: resize
+            size: 512
+
+        postprocessing:
+          - type: resize_prediction_boxes
+          - type: nms
+            overlap: 0.45
+        metrics:
+        - type: map

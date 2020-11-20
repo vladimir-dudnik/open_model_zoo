@@ -1,5 +1,5 @@
 models:
-  - name: efficientnet-b0-stanford-cars
+  - name: shufflenet-v2-stanford-cars
     launchers:
       - framework: dlsdk
         adapter: classification

@@ -19,12 +19,16 @@ models:
 
     datasets:
       - name: xnli
+        annotation_conversion:
+            converter: text_classification_pickle
+            annotation_file: XNLI/bert_xnli_annotation.pickle
         reader:
-          type: annotation_features_extractor
-          features:
-            - input_ids
-            - input_mask
-            - segment_ids
+            type: annotation_features_extractor
+            features:
+                - input_ids
+                - input_mask
+                - segment_ids
+
         metrics:
           - name: top1
             type: accuracy

@@ -12,7 +12,7 @@ models:
           raw_output: true
 
     datasets:
-      - name: KITIDetection
+      - name: KITTIDetection
         preprocessing:
           - type: resize
             size: 512

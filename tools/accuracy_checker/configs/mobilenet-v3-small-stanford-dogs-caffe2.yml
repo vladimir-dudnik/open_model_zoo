@@ -1,5 +1,5 @@
 models:
-  - name: efficientnet-b0-stanford-dogs
+  - name: mobilenet-v3-small-stanford-dogs
     launchers:
       - framework: dlsdk
         adapter: classification

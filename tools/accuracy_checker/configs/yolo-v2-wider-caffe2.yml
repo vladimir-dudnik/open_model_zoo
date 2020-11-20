@@ -12,7 +12,7 @@ models:
           raw_output: true
 
     datasets:
-      - name:
+      - name: wider_without_bkgr
 
         preprocessing:
           - type: resize

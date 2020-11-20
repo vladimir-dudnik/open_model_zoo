@@ -1,5 +1,5 @@
 models:
-  - name: efficientnet-b0-stanford-dogs
+  - name: shufflenet-v2-stanford-dogs
     launchers:
       - framework: dlsdk
         adapter: classification

@@ -8,7 +8,7 @@ models:
           labels_out: detected_classes
           scores_out: detected_scores
     datasets:
-      - name: VOC2007_without_background
+      - name: VOC2007_without_background_m
         preprocessing:
           - type: resize
             size: 320

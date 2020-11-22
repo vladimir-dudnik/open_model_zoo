@@ -12,7 +12,7 @@ models:
           raw_output: true
 
     datasets:
-      - name: VOC2007_without_background
+      - name: VOC2007_without_background_m
 
         preprocessing:
           - type: resize

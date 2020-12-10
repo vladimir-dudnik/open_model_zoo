@@ -1,0 +1,31 @@
+models:
+  - name: fcn-vgg16-s8
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: segmentation
+          make_argmax: true
+
+    datasets:
+      - name: VOC2012_Segmentation_11_subset
+        annotation_conversion:
+          converter: voc_segmentation
+          imageset_file: VOCdevkit/VOC2012/ImageSets/Segmentation/seg11valid.txt
+          images_dir: VOCdevkit/VOC2012/JPEGImages/
+          mask_dir: VOCdevkit/VOC2012/SegmentationClass/
+        data_source: VOCdevkit/VOC2012/JPEGImages/
+        segmentation_masks_source: VOCdevkit/VOC2012/SegmentationClass/
+        annotation: voc2011_segmentation.pickle
+        dataset_meta: voc2011_segmentation.json
+        preprocessing:
+          - type: resize
+            size: 500
+            enable_resize: True
+        postprocessing:
+          - type: encode_segmentation_mask
+            apply_to: annotation
+          - type: extend_segmentation_mask
+        metrics:
+          - type: mean_iou
+            use_argmax: false
+            presenter: print_scalar

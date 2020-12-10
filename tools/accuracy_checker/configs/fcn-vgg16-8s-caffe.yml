@@ -8,17 +8,8 @@ models:
 
     datasets:
       - name: VOC2012_Segmentation_11_subset
-        annotation_conversion:
-          converter: voc_segmentation
-          imageset_file: VOCdevkit/VOC2012/ImageSets/Segmentation/seg11valid.txt
-          images_dir: VOCdevkit/VOC2012/JPEGImages/
-          mask_dir: VOCdevkit/VOC2012/SegmentationClass/
-        data_source: VOCdevkit/VOC2012/JPEGImages/
-        segmentation_masks_source: VOCdevkit/VOC2012/SegmentationClass/
-        annotation: voc2011_segmentation.pickle
-        dataset_meta: voc2011_segmentation.json
         preprocessing:
-          - type: resize
+          - type: padding
             size: 500
             enable_resize: True
         postprocessing:

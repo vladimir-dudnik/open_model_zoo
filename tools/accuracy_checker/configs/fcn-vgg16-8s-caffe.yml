@@ -1,5 +1,5 @@
 models:
-  - name: fcn-vgg16-s8
+  - name: fcn-vgg16-8s
     launchers:
       - framework: dlsdk
         adapter:

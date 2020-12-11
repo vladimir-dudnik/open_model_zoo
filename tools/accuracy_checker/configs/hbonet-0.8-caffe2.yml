@@ -1,0 +1,22 @@
+models:
+  - name: hbonet-0.8
+
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: classification
+          classification_output: output
+
+    datasets:
+      - name: imagenet_1000_classes
+        reader: opencv_imread
+
+        preprocessing:
+          - type: resize
+            size: 256
+            aspect_ratio_scale: greater
+            interpolation: BILINEAR
+            use_pillow: True
+
+          - type: crop
+            size: 224

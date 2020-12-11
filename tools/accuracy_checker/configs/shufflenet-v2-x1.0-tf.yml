@@ -4,7 +4,7 @@ models:
   - framework: dlsdk
     adapter: classification
   datasets:
-  - name: imagenet2015_1000_classes
+  - name: imagenet_1000_classes_2015
     reader: pillow_imread
     preprocessing:
     - type: rgb_to_bgr

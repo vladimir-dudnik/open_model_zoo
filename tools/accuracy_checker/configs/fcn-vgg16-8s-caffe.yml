@@ -1,0 +1,22 @@
+models:
+  - name: fcn-vgg16-8s
+    launchers:
+      - framework: dlsdk
+        adapter:
+          type: segmentation
+          make_argmax: true
+
+    datasets:
+      - name: VOC2012_Segmentation_11_subset
+        preprocessing:
+          - type: padding
+            size: 500
+            enable_resize: True
+        postprocessing:
+          - type: encode_segmentation_mask
+            apply_to: annotation
+          - type: extend_segmentation_mask
+        metrics:
+          - type: mean_iou
+            use_argmax: false
+            presenter: print_scalar

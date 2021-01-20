@@ -4,7 +4,7 @@ models:
       - framework: dlsdk
         adapter:
           type: stacked_hourglass
-          score_map_out: '4702'
+          score_map_output: '4702'
 
     datasets:
       - name: mpii

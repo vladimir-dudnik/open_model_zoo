@@ -77,10 +77,13 @@ Accuracy Checker supports following set of preprocessors:
   * `split_channels` - split image channels to independent input data after conversion (Optional, default `False`).
 * `rgb_to_ycrcb` - converting image in RGB to YCrCb.
   * `split_channels` - split image channels to independent input data after conversion (Optional, default `False`).
+* `bgr_to_lab` - converts image in RGB format to LAB.
+* `rgb_to_lab` - converts image in BGR format to LAB.
 * `select_channel` - select channel only one specified channel from multichannel image.
   * `channel` - channel id in image (e.g. if you read image in RGB and want to select green channel, you need to specify 1 as channel)
 * `flip` - image mirroring around specified axis.
   * `mode` specifies the axis for flipping (`vertical` or `horizontal`).
+  * `merge_with_original` - allows addition flipped image to original (Optional, default `False`, original image will be replaced with flipped).
 * `crop` - central cropping for image.
   * `dst_width` and `dst_height` are destination width and height for image resizing respectively. You can also use `size` instead in case when destination sizes are equal,
   `central_fraction` to define fraction of size to crop (float value (0, 1])) or `max_square` for cropping central part for image by minimal image size (`True` value for enabling this feature).
@@ -181,6 +184,11 @@ Accuracy Checker supports following set of preprocessors:
   * `scale_height` - value to scale height relative to the original candidate height.
 * `object_crop_with_scale` - crop region from image using `center` coordinate and `scale` from annotation.
   * `dst_width` and `dst_height` are destination width and height for image cropping respectively. You can also use `size` instead in case when destination sizes are equal.
+* `one_hot_encoding` - create label map based on array of indexes (analog scatter).
+  * `value` - number for encoding label.
+  * `base` - number for encoding other classes.
+  * `axis` - axis responsible for classes.
+  * `number_of_classes` - number of used classes.
 
 ## Optimized preprocessing via OpenVINO Inference Engine
 OpenVINO™ is able perform preprocessing during model execution. For enabling this behaviour you can use command line parameter `--ie_preprocessing True`.

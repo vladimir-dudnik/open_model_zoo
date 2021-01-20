@@ -66,10 +66,13 @@ class TinyYOLOv1Adapter(Adapter):
         Args:
             identifiers: list of input data identifiers
             raw: output of model
+            frame_meta: meta info about prediction
         Returns:
              list of DetectionPrediction objects
         """
-        prediction = self._extract_predictions(raw, frame_meta)[self.output_blob]
+        prediction = self._extract_predictions(raw, frame_meta)
+        self.select_output_blob(prediction)
+        prediction = prediction[self.output_blob]
 
         PROBABILITY_SIZE = 980
         CONFIDENCE_SIZE = 98
@@ -224,10 +227,13 @@ class YoloV2Adapter(Adapter):
         Args:
             identifiers: list of input data identifiers
             raw: output of model
+            frame_meta: meta info about data processing
         Returns:
             list of DetectionPrediction objects
         """
-        predictions = self._extract_predictions(raw, frame_meta)[self.output_blob]
+        predictions = self._extract_predictions(raw, frame_meta)
+        self.select_output_blob(predictions)
+        predictions = predictions[self.output_blob]
 
         result = []
         box_size = self.classes + self.coords + 1
@@ -459,6 +465,8 @@ class YoloV3ONNX(Adapter):
         ):
             out_boxes, out_scores, out_classes = [], [], []
             for idx_ in indices:
+                if idx_[0] == -1:
+                    break
                 out_classes.append(idx_[1])
                 out_scores.append(scores[tuple(idx_[1:])])
                 out_boxes.append(boxes[idx_[2]])

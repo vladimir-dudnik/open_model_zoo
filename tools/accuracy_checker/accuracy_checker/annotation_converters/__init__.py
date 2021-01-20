@@ -23,7 +23,7 @@ from .pascal_voc import PascalVOCDetectionConverter
 from .sample_converter import SampleConverter
 from .wider import WiderFormatConverter
 from .detection_opencv_storage import DetectionOpenCVStorageFormatConverter
-from .lfw import LFWConverter
+from .lfw import LFWConverter, FaceRecognitionBinary
 from .vgg_face_regression import VGGFaceRegressionConverter
 from .super_resolution_converter import (
     SRConverter, SRMultiFrameConverter, MultiTargetSuperResolutionConverter, SRDirectoryBased
@@ -92,6 +92,7 @@ from .mpii import MPIIDatasetConverter
 from .mapillary_20 import Mapillary20Converter, MapillaryVistasConverter
 from .antispoofing import AntispoofingDatasetConverter
 from .sound_classification_converter import SoundClassificationFormatConverter
+from .ade20k_image_translation import ADE20kImageTranslationConverter
 from .salient_object_detection import SalientObjectDetectionConverter
 from .common_object_detection import CommonDetectionConverter
 from .wflw import WFLWConverter
@@ -111,6 +112,7 @@ __all__ = [
     'MARSConverter',
     'DetectionOpenCVStorageFormatConverter',
     'LFWConverter',
+    'FaceRecognitionBinary',
     'VGGFaceRegressionConverter',
     'SRConverter',
     'SRMultiFrameConverter',
@@ -176,6 +178,7 @@ __all__ = [
     'MPIIDatasetConverter',
     'AntispoofingDatasetConverter',
     'SoundClassificationFormatConverter',
+    'ADE20kImageTranslationConverter',
     'SalientObjectDetectionConverter',
     'CommonDetectionConverter',
     'WFLWConverter',

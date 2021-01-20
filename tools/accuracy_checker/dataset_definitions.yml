@@ -125,6 +125,19 @@ datasets:
         type: coco_precision
         max_detections: 20
 
+  - name: ms_coco_val2017_keypoints
+    data_source: val2017
+    annotation_conversion:
+      converter: mscoco_keypoints
+      annotation_file: person_keypoints_val2017.json
+      sort_key: image_size
+      images_dir: val2017
+    annotation: mscoco_val2017_keypoints.pickle
+    dataset_meta: mscoco_val2017_keypoints.json
+    metrics:
+      - name: AP
+        type: coco_orig_keypoints_precision
+
   - name: imagenet_1000_classes
     annotation_conversion:
       converter: imagenet
@@ -527,6 +540,16 @@ datasets:
     metrics:
       - type: pairwise_accuracy_subsets
         subset_number: 2
+
+  - name: lfw_mtcnn_align
+    # converted from LFW public dataset with using
+    # script https://github.com/davidsandberg/facenet/blob/master/src/align/align_dataset_mtcnn.py
+    data_source: lfw_mtcnnpy_160
+    annotation_conversion:
+      converter: lfw
+      pairs_file: LFW/annotation/pairs.txt
+      extension: png
+    annotation: lfw_mtcnn_align.pickle
 
   - name: ICDAR2015
     data_source: ICDAR15_DET/ch4_test_images
@@ -1084,3 +1107,19 @@ datasets:
       audio_dir: audio_dataset/data
     annotation: sound_classification.pickle
     reader: wav_reader
+
+  - name: cocosnet_image_translation
+    annotation_conversion:
+      converter: ade20k_image_translation
+      annotations_dir: ADEChallengeData2016/annotations
+      reference_file: cocosnet_ade20k_ref_test.txt
+    data_source: ADEChallengeData2016
+    additional_data_source: ADEChallengeData2016/images
+
+  - name: lfw_bin
+    data_source: lfw_bin/images
+    annotation_conversion:
+      converter: face_recognition_bin
+      bin_file:  lfw_bin/lfw.bin
+      images_dir: lfw_bin/images
+      convert_images: True

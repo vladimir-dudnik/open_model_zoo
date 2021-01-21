@@ -1,0 +1,24 @@
+models:
+  - name: GPT-2
+    launchers:
+      - framework: dlsdk
+        adapter:
+            type: common_language_modeling
+            logits_output: "logits"
+        inputs:
+          - name: "input_ids"
+            type: INPUT
+            value: "input_ids"
+            precision: I32
+
+    datasets:
+      - name: wikitext_2_raw
+        annotation: wikitext_2_raw.pickle
+
+        reader:
+          type: annotation_features_extractor
+          features:
+          - input_ids
+        metrics:
+          - type: 'perplexity'
+            name: 'Perplexity'
